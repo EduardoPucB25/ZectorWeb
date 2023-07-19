@@ -39,7 +39,6 @@ export const Routing = () => {
             <Route path='/zector/cma/' element={<PublicLayout />}>
                <Route index element={<Login/>} />
                <Route path='homeAdmin' element={<HomeAdmin />} />
-               
                <Route path='login' element={<Login />} />
                <Route path='register' element={<Register />} />
                <Route path='miperfil' element={<MiPerfil />} />
