@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import HeaderLYR from '../components/HeaderLYR.JSX';
+import HeaderLYR from '../components/HeaderLYR.jxs';
 
 
 
