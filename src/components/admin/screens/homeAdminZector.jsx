@@ -57,7 +57,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // COMPONENTES INDIVIDUALES
 import Tables from '../components/Tables';
-
 // import GridFormEditarPersonal from '../components/GridFormEditarPersonal';
 import GridFormPersonal from '../components/GridFormPersonal';
 import { PanelMenuAdmin } from '../components/PanelMenu';
