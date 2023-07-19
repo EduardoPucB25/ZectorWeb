@@ -108,18 +108,7 @@ export const Areas = () => {
                 />
 
               </CardMedia>
-              <Avatar
-                alt="Remy Sharp"
-                src={ImageUser}
-                sx={{
-                  height: (w * .20),
-                  width: (w * .20),
-                  zIndex: 'tooltip',
-                  mt: (-w * .010),
-                  marginInline: (w * .048),
 
-                }}
-              />
             </CardContent>
             
             <CardContent sx={{
@@ -134,7 +123,7 @@ export const Areas = () => {
                     laptop: 'none'
                   }
                 }} variant="h5" fontSize="sm" textAlign={'center'} >
-                  Dr. Marcos Movil
+                  Consultorio 200
                 </Typography>
               </Responsive>
               <Responsive >
@@ -145,8 +134,8 @@ export const Areas = () => {
                   display: {
                     laptop: 'none'
                   }
-                }} variant="h5" fontSize="sm" textAlign={'center'} >
-                  Medicina Interna / Medicina Critica / Terapia intensiva
+                }} variant="h6" fontSize="sm" textAlign={'center'} >
+                  Bienvenido a consultorio 200, seleccione su médico para mayor información
                 </Typography>
               </Responsive>
               <Divider />
@@ -167,20 +156,29 @@ export const Areas = () => {
                       theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                   }}
                 >
-                  <Grid container >
-                    <Grid item xs={12} container direction="column" spacing={2}>
+                  
+                    <Grid xs={12} container direction="row" >
+                      <Grid item xs>
+                      <Avatar
+                          alt="Remy Sharp"
+                          src={ImageUser}
+                          sx={{
+                            height: (w * .20),
+                            width: (w * .20),
+                            zIndex: 'tooltip',
+                            mt: (-w * .010),
+                            marginInline: (w * .048),
+
+                          }}
+                        />
+                      </Grid>
                       <Grid item xs>
                         <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
                           Cedula Especialidad 516164 / 51651
                         </Typography>
                       </Grid>
-                      <Grid item xs>
-                        <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
                     </Grid>
-                  </Grid>
+                  
                 </Paper>
               </Responsive>
 

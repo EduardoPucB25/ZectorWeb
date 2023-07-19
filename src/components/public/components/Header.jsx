@@ -64,11 +64,14 @@ export default function Header() {
             textAlign: 'center',
             justifyContent: 'space-between',
             width: {w},
+            height: 80,
             backgroundColor: '#1f3c59'
           }}>
-        
-        <Typography variant="h4" color='white' gutterBottom sx={{ minWidth: 200, marginTop: 2}}>
-          Bienvenido 
+        {/* Consumir directo el nobre del hospital */}
+          {/* Icono de CMA */}
+
+        <Typography variant="h6" color='white' gutterBottom sx={{ minWidth: 200, marginTop: 2, marginLeft: 30}}>
+           Centro médico de las Américas
         </Typography>
 
 

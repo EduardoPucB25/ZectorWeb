@@ -13,6 +13,7 @@ import LoginZector from '../components/admin/layout/LoginZector';
 import RegisterZector from '../components/admin/layout/RegisterZector';
 import { MiPerfil } from '../components/public/screens/miPerfil';
 import { Areas } from '../components/public/screens/areas/areas';
+import HomeAdminMUI from '../components/public/screens/homeAMUI';
 
 
 
@@ -58,12 +59,14 @@ export const Routing = () => {
             <Route path='/zector/cma/' element={<PublicLayout />}>
                <Route index element={<Login/>} />
                <Route path='homeAdmin' element={<HomeAdmin />} />
+               
                <Route path='login' element={<Login />} />
                <Route path='register' element={<Register />} />
                <Route path='miperfil' element={<MiPerfil />} />
                <Route path='areas' element={<Areas />} />
 
             </Route>
+            <Route path='/zector/cma/homeAdminMUI' element={<HomeAdminMUI />}/>
 {/* 
             {hospitales.map((hospital) => {  
                <Route path={UrlPublic + hospital.alias} element={<PublicLayout />}>
