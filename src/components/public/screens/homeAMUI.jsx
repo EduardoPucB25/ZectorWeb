@@ -15,7 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
@@ -24,10 +24,9 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+// import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { grey } from '@mui/material/colors';
 import imageDr from '../../../assets/images/doctor1.jpg'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -38,14 +37,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GroupIcon from '@mui/icons-material/Group';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import StreamIcon from '@mui/icons-material/Stream';
 
 // TABLE CRUD COMPLETE
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
+// import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -56,12 +55,12 @@ import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { StaffService } from '../../../services/ProductService';
 
-import ImgDr1 from '../../../assets/images/doctor1.jpg';
-import ImgDr2 from '../../../assets/images/doctor2.jpg';
-import ImgDr3 from '../../../assets/images/doctor3.png';
-import ImgDr4 from '../../../assets/images/doctor4.jpg';
-import ImgDr5 from '../../../assets/images/doctor5.jpg';
-import ImgDr6 from '../../../assets/images/doctor6.jpg';
+// import ImgDr1 from '../../../assets/images/doctor1.jpg';
+// import ImgDr2 from '../../../assets/images/doctor2.jpg';
+// import ImgDr3 from '../../../assets/images/doctor3.png';
+// import ImgDr4 from '../../../assets/images/doctor4.jpg';
+// import ImgDr5 from '../../../assets/images/doctor5.jpg';
+// import ImgDr6 from '../../../assets/images/doctor6.jpg';
 
 
 const drawerWidth = 290;
@@ -180,14 +179,7 @@ export default function HomeAdminMUI() {
     { nombre: 'Enfermeras' },
     { nombre: 'Administrativo' },
   ]
-  const modules = [
-    {
-      nombre: 'Staff', icon: <GroupIcon />},
-    { nombre: 'Zonas', icon: <ShareLocationIcon />, category: categoryZonas },
-    { nombre: 'Buzón', icon: <MailIcon />, category: categoryBuzon },
-    { nombre: 'Anuncios', icon: <AnnouncementIcon />, category: categoryAnuncios },
-    { nombre: 'Blogs', icon: <StreamIcon />, category: categoryBlogs }
-  ]
+
 
   const [staffs, setstaffs] = useState([]);
   const columns = [
@@ -607,7 +599,7 @@ const deletestaffsDialogFooter = (
                   </Typography>
                 </AccordionSummary>
                 {categoryStaff.map((staff) => (
-                  <AccordionDetails>
+                  <AccordionDetails key={staff.nombre}>
                     <Typography>
                       {staff.nombre}
                     </Typography>

@@ -1,5 +1,4 @@
-import React, { Component, useState} from 'react';
-import { styled } from '@mui/material/styles';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -8,16 +7,10 @@ import Link from '@mui/joy/Link';
 // IMPORTS PRIMEREACT
 
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+
 import { useFormRegister } from '../../../hooks/use-form-register';
 import { Password } from 'primereact/password';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
  export const Register = () => {
 
   const {form, changed} = useFormRegister({});

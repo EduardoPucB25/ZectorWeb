@@ -10,13 +10,6 @@ import Link from '@mui/joy/Link';
 
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-        
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
 
 export const Login = () => {
 

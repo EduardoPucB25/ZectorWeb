@@ -1,19 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Grid, Paper, Typography, Box, ThemeProvider, Avatar, CardMedia } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Grid, Paper, Typography, Box, ThemeProvider } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+
 import { Button } from 'primereact/button';
 import { grey } from '@mui/material/colors';
-import MenuIcon from '@mui/icons-material/Menu';
 import { theme } from '../styles/responsiveScreens';
 // ICONS
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -63,7 +54,7 @@ export default function Footer() {
     }
   }))
   // NOMBRE DEL USUARIO
-  const nombreUsuario = 'a Zector';
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

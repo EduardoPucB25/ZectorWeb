@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import HomeAdmin from '../components/public/screens/homeAdmin';
 import {Register} from '../components/public/screens/register';
 import {Login} from '../components/public/screens/login';
@@ -8,7 +8,6 @@ import HomeAdminZector from '../components/admin/screens/homeAdminZector';
 import { AdminLayout } from '../components/admin/layout/AdminLayout';
 import { PublicLayout } from '../components/public/layout/PublicLayout';
 import { LayoutLYRAdmin } from '../components/admin/layout/LayoutLYRAdmin';
-import logoHospital from '../assets/images/Hospital.jpg'
 import LoginZector from '../components/admin/layout/LoginZector';
 import RegisterZector from '../components/admin/layout/RegisterZector';
 import { MiPerfil } from '../components/public/screens/miPerfil';
@@ -19,25 +18,6 @@ import HomeAdminMUI from '../components/public/screens/homeAMUI';
 
 export const Routing = () => {
 
-   const hospitales = [
-      {
-         nombre: 'Centro Medico de las Americas',
-         logo: logoHospital,
-         alias: 'CMA'
-      },
-      {
-         nombre: 'Hospital General Agustín OHoran',
-         logo: logoHospital,
-         alias: 'OHoran'
-      },
-      {
-         nombre: 'Cruz Roja Mérida',
-         logo: logoHospital,
-         alias: 'CRM'
-      },
-   ]
-   
-   const UrlPublic = '/zector/'
    return (
       <BrowserRouter>
          <Routes>

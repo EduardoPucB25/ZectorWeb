@@ -1,42 +1,26 @@
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Grid, Paper, Typography, Box, ThemeProvider, Avatar, CardMedia } from '@mui/material';
-import Link from '@mui/joy/Link';
-import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
+
 import { Card, CardContent, Divider } from '@mui/material';
-import Favorite from '@mui/icons-material/Favorite';
-import Chip from '@mui/joy/Chip';
-import Visibility from '@mui/icons-material/Visibility';
+
 import { theme } from '../styles/responsiveScreens';
 
 // IMPORTS PRIMEREACT
 import { Button } from 'primereact/button';
 import { useFormRegister } from '../../../hooks/use-form-register';
-
 // import ImageUser from '../../../../assets/images/doctor3.png'
 import ImageUser from '../../../assets/images/doctor1.jpg'
-
 import PortadaUser from '../../../assets/images/portada2.jpg'
-
 // Icons mui
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { grey, red, blue } from '@mui/material/colors';
 
-
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
 
 export const MiPerfil = () => {
 

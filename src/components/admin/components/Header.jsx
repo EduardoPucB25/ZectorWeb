@@ -8,13 +8,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import imageDr from '../../../assets/images/doctor1.jpg'
 import Link from '@mui/joy/Link';
-import { redirect } from 'react-router-dom';
+
 
 
 
@@ -32,10 +32,7 @@ export default function Header() {
     setAnchorEl(null);
 
   };
-  const handleLogOut = () => {
 
-
-  };
 
   return (
     <React.Fragment>

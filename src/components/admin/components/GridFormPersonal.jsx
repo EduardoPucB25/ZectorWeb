@@ -1,27 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
+
 import imageDr from '../../../assets/images/doctor1.jpg'
 import { Avatar } from '@mui/material';
 
 // IMPORTS PRIMEREACT
 import { FileUpload } from 'primereact/fileupload';
 import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
+
 import { SelectList } from './SelectList';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 
 
-const Img = styled('img')({
-   margin: 'auto',
-   display: 'block',
-   maxWidth: '100%',
-   maxHeight: '100%',
-});
+
 
 export default function GridFormPersonal() {
    return (

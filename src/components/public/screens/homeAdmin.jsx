@@ -41,9 +41,8 @@ import { Dialog } from 'primereact/dialog';
 import { PrimeIcons } from 'primereact/api';
 import { FileUpload } from 'primereact/fileupload';
 import { Dropdown } from 'primereact/dropdown';
-import { SelectList } from '../components/SelectList';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { ListBox } from 'primereact/listbox';
+
 
 // ICONS MODULES
 // PERSONAL
@@ -57,17 +56,7 @@ import ImgDr6 from '../../../assets/images/doctor6.jpg';
 
 function TablePersonal(props) {
   const tables = props.table;
-  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const opened = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleEdit = () => {
-
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -642,167 +631,6 @@ function Row(props) {
   );
 }
 
-
-
-
-// function Module(props) {
-//   return (
-
-//     <div>
-//       <Accordion multiple >
-//           <AccordionTab header='hola' >
-//             {/* <Button label={sub.nombre} icon={sub.icon} key={sub.id} rounded text severity="secondary" aria-label="User" /> */}
-//           </AccordionTab>
-//           <AccordionTab header='hola' >
-//             {/* <Button label={sub.nombre} icon={sub.icon} key={sub.id} rounded text severity="secondary" aria-label="User" /> */}
-//           </AccordionTab>
-//           <AccordionTab header='hola' >
-//             {/* <Button label={sub.nombre} icon={sub.icon} key={sub.id} rounded text severity="secondary" aria-label="User" /> */}
-//           </AccordionTab>
-//       </Accordion>
-
-
-//       <Box >
-//         <Button label="Agregar" icon={PrimeIcons.PLUS} rounded text severity="info" aria-label="User" />
-//       </Box>
-//     </div>
-//   );
-// }
-
-function CategoryStaff(props) {
-  const [selectedPersonal, setSelectedPersonal] = useState(null);
-  // const subCategory = props.category;
-  const items = [];
-  {
-    categoryPersonal.map((staff) => {
-      items.push({
-        name: staff.nombre
-      })
-    })
-  }
-  return (
-    <div>
-      <ListBox value={selectedPersonal} onChange={(e) => setselectedPersonal(e.value)} options={items} optionLabel="name" className="w-full md:w-14rem" />
-      <Box >
-        <Button label="Agregar" icon={PrimeIcons.PLUS} rounded text severity="info" aria-label="User" />
-      </Box>
-
-    </div>
-  );
-}
-
-// function SubCategory(props) {
-
-//   const itemsModule = [];
-//   const module =[];
-//   const category = [];
-//   const subCategory=[];
-
-
-//     {modules.map((mod) =>{
-//       itemsModule.push({
-//         label: mod.nombre,
-//         icon: mod.icon,
-//       })
-//     })}
-//   return (
-//     <div>
-//       <PanelMenu model={itemsModule}/>
-
-//     </div>
-//   );
-// }
-
-
-
-// function Category(props) {
-
-//   const itemsModule = [];
-
-
-//   const catPersonal = [];
-//   const catZonas=[];
-//   const subCatAreas=[];
-
-//   const module =[];  
-//   const subCategory=[];
-//   const category =[];
-
-//   {}
-
-//   {module.push(catPersonal)}
-//   {categoryZonas.map((zonas) =>{
-//     catZonas.push({
-//       label: zonas.nombre,
-//       icon: zonas.icon,
-
-//     })
-//   })}
-//     {categoryPersonal.map((personal) =>{
-//       catPersonal.push({
-//         label: personal.nombre,
-//         icon: personal.icon,
-
-//       })
-//     })}
-
-//     {module.map((mod) =>{
-
-//       itemsModule.push({
-//         label: mod.nombre,
-//         icon: mod.icon,
-
-//       })
-//     })}
-
-
-
-
-
-//   return (
-//     <div>
-//       <PanelMenu model={itemsModule}/>
-
-//     </div>
-//   );
-// }
-
-
-// class SelectForm extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       selectedEspecialidad: null
-
-//     };
-
-//     especialidad = [
-//       { name: 'Nutrición' },
-//       { name: 'Neurologia' },
-//       { name: 'Cirugia General' },
-//       { name: 'Cardiología' },
-//       { name: 'Especialidad' }
-//     ];
-
-
-//     onEspecialidadChange = onEspecialidadChange(data);
-
-//   };
-
-//   onEspecialidadChange(e) {
-//     setState({ selectedEspecialidad: e.value });
-//   }
-
-//   render() {
-//     return (
-//       <div className="dropdown-demo">
-//         <div className="card">
-//           <Dropdown value={state.selectedEspecialidad} options={especialidad} onChange={this.onEspecialidadChange} optionLabel="name" filter showClear filterBy="name" placeholder="Especialidad" />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 
 function createData(imagen, nombre, id, correo, telefono, especialidad) {
   return {
