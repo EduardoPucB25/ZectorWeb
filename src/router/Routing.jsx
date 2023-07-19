@@ -22,7 +22,7 @@ export const Routing = () => {
       <BrowserRouter>
          <Routes>
             {/* RUTAS DE ZECTOR ADMIN */}
-            <Route path='/zector/' element={<AdminLayout />}>
+            {/* <Route path='/zector/' element={<AdminLayout />}>
                <Route index element={<HomeAdminZector />} />
                <Route path='homeAdmin' element={<HomeAdminZector />} />
 
@@ -32,7 +32,7 @@ export const Routing = () => {
             </Route>
             <Route path='/zector/login' element={<LayoutLYRAdmin />}>
                <Route index element={<LoginZector />} />
-            </Route>
+            </Route> */}
             {/* ----------------------------------------------------------------- */}
             {/* RUTAS DE ZECTOR/HOSPITAL(ES) PUBLICO */}
 
