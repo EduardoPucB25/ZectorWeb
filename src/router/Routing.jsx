@@ -45,7 +45,7 @@ export const Routing = () => {
                <Route path='areas' element={<Areas />} />
 
             </Route>
-            <Route path='/zector/cma/homeAdminMUI' element={<HomeAdminMUI />}/>
+            <Route path='/cma/homeAdminMUI' element={<HomeAdminMUI />}/>
 {/* 
             {hospitales.map((hospital) => {  
                <Route path={UrlPublic + hospital.alias} element={<PublicLayout />}>
