@@ -3,13 +3,13 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import HomeAdmin from '../components/public/screens/homeAdmin';
 import {Register} from '../components/public/screens/register';
 import {Login} from '../components/public/screens/login';
-import HomeAdminZector from '../components/admin/screens/homeAdminZector';
+// import HomeAdminZector from '../components/admin/screens/homeAdminZector';
 
-import { AdminLayout } from '../components/admin/layout/AdminLayout';
+// import { AdminLayout } from '../components/admin/layout/AdminLayout';
 import { PublicLayout } from '../components/public/layout/PublicLayout';
-import { LayoutLYRAdmin } from '../components/admin/layout/LayoutLYRAdmin';
-import LoginZector from '../components/admin/layout/LoginZector';
-import RegisterZector from '../components/admin/layout/RegisterZector';
+// import { LayoutLYRAdmin } from '../components/admin/layout/LayoutLYRAdmin';
+// import LoginZector from '../components/admin/layout/LoginZector';
+// import RegisterZector from '../components/admin/layout/RegisterZector';
 import { MiPerfil } from '../components/public/screens/miPerfil';
 import { Areas } from '../components/public/screens/areas/areas';
 import HomeAdminMUI from '../components/public/screens/homeAMUI';
