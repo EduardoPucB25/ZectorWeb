@@ -36,7 +36,7 @@ export const Routing = () => {
             {/* ----------------------------------------------------------------- */}
             {/* RUTAS DE ZECTOR/HOSPITAL(ES) PUBLICO */}
 
-            <Route path='/zector/cma/' element={<PublicLayout />}>
+            <Route path='/cma/' element={<PublicLayout />}>
                <Route index element={<Login/>} />
                <Route path='homeAdmin' element={<HomeAdmin />} />
                <Route path='login' element={<Login />} />
