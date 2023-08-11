@@ -7,11 +7,13 @@ import {Login} from '../components/public/screens/login';
 
 // import { AdminLayout } from '../components/admin/layout/AdminLayout';
 import { PublicLayout } from '../components/public/layout/PublicLayout';
+import { LayoutLYRPublic } from '../components/public/layout/LayoutLYRPublic';
+
 // import { LayoutLYRAdmin } from '../components/admin/layout/LayoutLYRAdmin';
 // import LoginZector from '../components/admin/layout/LoginZector';
 // import RegisterZector from '../components/admin/layout/RegisterZector';
 import { MiPerfil } from '../components/public/screens/miPerfil';
-import { Areas } from '../components/public/screens/areas/areas';
+import { Areas } from '../components/public/screens/areas';
 import HomeAdminMUI from '../components/public/screens/homeAMUI';
 
 
@@ -39,13 +41,19 @@ export const Routing = () => {
             <Route path='/cma/' element={<PublicLayout />}>
                <Route index element={<Login/>} />
                <Route path='homeAdmin' element={<HomeAdmin />} />
+
+               <Route path='miperfil' element={<MiPerfil />} />
+               <Route path='doctor' element={<MiPerfil />} />
+               <Route path='areas' element={<Areas />} />
+            </Route>
+            <Route path='/cma/' element={<LayoutLYRPublic />}>
+               <Route index element={<Login/>} />
                <Route path='login' element={<Login />} />
                <Route path='register' element={<Register />} />
-               <Route path='miperfil' element={<MiPerfil />} />
-               <Route path='areas' element={<Areas />} />
-
             </Route>
+            
             <Route path='/cma/homeAdminMUI' element={<HomeAdminMUI />}/>
+            
 {/* 
             {hospitales.map((hospital) => {  
                <Route path={UrlPublic + hospital.alias} element={<PublicLayout />}>

@@ -70,23 +70,352 @@ export const MiPerfil = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Responsive >
-        <Paper
-          sx={{
-            p: 0,
-            margin: 'auto',
-            widht: {},
-            flexGrow: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-          }}
-        >
-          <Card >
-            <CardContent sx={{ padding: 0 }}>
+
+      <Paper
+        sx={{
+          display: {
+            laptop: 'none'
+          },
+          margin: 'auto',
+          width: w,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        }}
+      >
+        <CardContent sx={{
+          width: w,
+          p: 0,
+          margin: 'auto'
+        }}>
+          <CardMedia>
+            <img
+              width={w}
+              height={(w * .20)}
+              src={PortadaUser}
+              loading="lazy"
+              alt=""
+            />
+
+          </CardMedia>
+          <Avatar
+            alt="Remy Sharp"
+            src={ImageUser}
+            sx={{
+              height: (w * .20),
+              width: (w * .20),
+              zIndex: 'tooltip',
+              mt: 2,
+              marginInline: (w * .050),
+            }}
+          />
+          <Typography sx={{
+            margin: 1,
+            display: {
+              laptop: 'none'
+            }
+          }} variant="h6" fontSize="sm" textAlign={'center'} >
+            Dr. Alberto Perez Mobile
+          </Typography>
+
+
+          <Typography sx={{
+            margin: 1,
+            marginBottom: 3,
+            color: 'primary.main',
+            display: {
+              laptop: 'none'
+            }
+          }} variant="h6" fontSize="sm" textAlign={'center'} >
+            Medicina Interna / Medicina Critica / Terapia intensiva
+          </Typography>
+
+          <Divider />
+
+          {/* CEDULA */}
+          <Paper
+            sx={{
+              p: 1,
+              margin: 'auto',
+              marginInline: 1.5,
+              marginBlock: 1,
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs={12} container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                    Cedula Especialidad 516164 / 51651
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                    Cedula Especialidad 516164 / 51651
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+          <Paper
+            sx={{
+              display: {
+                laptop: 'none'
+              },
+              p: 1,
+              marginInline: 1.5,
+              marginBlock: 1,
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs={12} container direction="column" spacing={5}>
+                <Grid item xs>
+                  <Typography variant="h6" fontSize="md" textAlign={'center'} >
+                    Especialista en diagnostico y tratamiento médico, asi como el seguimiento de enfermedades, crónicas y sus complicaciones
+
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+
+
+          <Paper
+            sx={{
+              p: 0,
+              marginInline: 1.5,
+              marginBlock: 1,
+              maxWidth: { w },
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            
+              
+              <Grid item xs container direction='row' paddingY={2}>
+                      <Grid item paddingX={3}>
+                        <Button
+                          rounded
+                          outlined
+                          severity='info'
+                          raised
+                          loading={loadingCall} onClick={loadC}
+                        >
+                          <LocalPhoneIcon sx={{ fontSize: 15 }} color="white" />
+                          <Typography variant="body2"  >
+                            Llamar
+                          </Typography>
+
+                        </Button>                            
+                      </Grid>
+                      <Grid item paddingX={3}>
+                      <Button
+                        outlined
+                        rounded
+                        severity='secondary'
+                        raised
+                        loading={loadingWP} onClick={loadW}
+
+                      >
+                        <WhatsAppIcon sx={{ fontSize: 20 }} color="success" />
+                        <Typography variant="body2" >
+                          WhatsApp
+                        </Typography>
+                      </Button>
+                      </Grid>                      
+                    
+                  
+                </Grid>
+              
+
+
+            
+          </Paper>
+
+          {/* DESCRIPCION */}
+          <Paper
+            sx={{
+              display: {
+                laptop: 'none'
+              },
+              p: 0,
+              marginInline: 1.5,
+              marginBlock: 1,
+              maxWidth: { w },
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs container direction='column' paddingY={2}>
+                <Grid item xs>
+
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid item xs container direction='row' paddingX={1}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2} padding={2}>
+                          <Grid item >
+                            <AccountBoxIcon sx={{ fontSize: 40 }} />
+                          </Grid>
+                          <Grid item >
+                            <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
+                              Consultorio 204
+                            </Typography>
+                            <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                              Piso 2, Consultorio 204
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Grid>
+                  </Box>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid item xs container direction='row' paddingX={1}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2} padding={2}>
+                          <Grid item >
+                            <ScheduleIcon sx={{ fontSize: 40 }} />
+                          </Grid>
+                          <Grid item >
+                            <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
+                              Horarios
+                            </Typography>
+                            <Typography fontSize="md" variant='h6' sx={{ margin: 1 }}>
+                              Cita previa
+                            </Typography>
+                            <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                              10:00 am - 2:00 pm
+                            </Typography>
+                            <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                              4:00 pm - 6:00 pm
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+          {/* CEDULA */}
+          <Paper
+            sx={{
+              display: {
+                laptop: 'none'
+              },
+              p: 0,
+              marginInline: 1.5,
+              marginBlock: 1,
+              maxWidth: { w },
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid item xs container direction='row' paddingX={0}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid xs item >
+                  <Typography variant="h5" fontWeight="md" padding={4} textColor="text.secondary">
+                    Servicios
+                  </Typography>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Grid xs item >
+                  <Button
+                    rounded
+                    text
+                    severity='secondary'
+
+                  >
+                    <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                  </Button>
+                </Grid>
+              </Box>
+            </Grid>
+          </Paper>
+
+          {/* CEDULA */}
+          <Paper
+            sx={{
+              p: 0,
+              marginInline: 1.5,
+              marginBlock: 1,
+              maxWidth: { w },
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid item xs container direction='column' paddingX={0}>
+              <Box sx={{ flexGrow: 0 }}>
+                <Grid item xs container direction='row' paddingX={0}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid item >
+                      <Typography variant="h5" fontWeight="md" padding={3} textColor="text.secondary">
+                        Formación academica
+                      </Typography>
+                    </Grid>
+                  </Box>
+                  <Box sx={{ flexGrow: 0 }}>
+                    <Grid item >
+                      <Button
+                        rounded
+                        text
+                        severity='secondary'
+
+                      >
+                        <ArrowDropDownIcon sx={{ fontSize: 60 }} />
+                      </Button>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h5' sx={{ margin: 2 }}>
+                    Universidad
+                  </Typography>
+
+                </Grid>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                    C. 35 #546 x 46 y 48 Col. Alguna Colonia
+                  </Typography>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                    Dato Libre
+                  </Typography>
+                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                    Dato Libre
+                  </Typography>
+                </Grid>
+              </Box>
+            </Grid>
+          </Paper>
+
+        </CardContent>
+      </Paper>
+
+      {/* <CardContent sx={{ padding: 0 }}>
               <CardMedia>
                 <img
                   width={w}
-                  height={(w * .2)}
+                  height={(w * .15)}
                   src={PortadaUser}
                   loading="lazy"
                   alt=""
@@ -97,986 +426,415 @@ export const MiPerfil = () => {
                 alt="Remy Sharp"
                 src={ImageUser}
                 sx={{
-                  height: (w * .20),
-                  width: (w * .20),
+                  height: (w * .15),
+                  width: (w * .15),
                   zIndex: 'tooltip',
-                  mt: (-w * .010),
-                  marginInline: (w * .048),
-
+                  mt: 5,
+                  marginInline:  (w * .035),
                 }}
               />
-            </CardContent>
-            
-            <CardContent sx={{
-              display: {
-                laptop: 'none'
-              }
-            }}>
-              <Responsive >
-                <Typography sx={{
-                  margin: 1,
-                  display: {
-                    laptop: 'none'
-                  }
-                }} variant="h5" fontSize="sm" textAlign={'center'} >
-                  Dr. Marcos Movil
-                </Typography>
-              </Responsive>
-              <Responsive >
-                <Typography sx={{
-                  margin: 1,
-                  marginBottom: 3,
-                  color: 'primary.main',
-                  display: {
-                    laptop: 'none'
-                  }
-                }} variant="h5" fontSize="sm" textAlign={'center'} >
-                  Medicina Interna / Medicina Critica / Terapia intensiva
-                </Typography>
-              </Responsive>
-              <Divider />
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 3,
-                    margin: 'auto',
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="column" spacing={2}>
-                      <Grid item xs>
-                        <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
-                      <Grid item xs>
-                        <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
+            </CardContent> */}
 
-              <Responsive>
-                
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="column" spacing={5}>
-                      <Grid item xs>
-                        <Typography variant="h6" fontSize="md" textAlign={'center'} >
-                          Especialista en diagnostico y tratamiento médico, asi como el seguimiento de enfermedades, crónicas y sus complicaciones
 
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
-              <Responsive>
-                
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 0,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='column' paddingX={4}>
-                      <Grid item xs>
 
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Grid item container direction={'row'}  >
-                            <Box sx={{ flexGrow: 1, padding: 2 }}>
-                              <Grid item paddingX={9}>
-                                <Button
-                                  rounded
-                                  outlined
-                                  severity='info'
-                                  raised
-                                  loading={loadingCall} onClick={loadC}
-                                >
-                                  <LocalPhoneIcon sx={{ fontSize: 25 }} color="white" />
-                                  <Typography variant="h5" padding={1} >
-                                    Llamar
-                                  </Typography>
+      {/* Contenido Laptop */}
 
-                                </Button>
-                              </Grid>
-                            </Box>
-                            <Box sx={{ flexGrow: 1, padding: 2 }}>
-                              <Grid item paddingX={7}>
-                                <Button
-                                  outlined
-                                  rounded
-                                  severity='secondary'
-                                  raised
-                                  loading={loadingWP} onClick={loadW}
+      <Paper
+        sx={{
+          display: {
+            mobile: 'none',
+            laptop: 'none',
+            desktop: 'block'
+          },
 
-                                >
-                                  <WhatsAppIcon sx={{ fontSize: 25 }} color="success" />
-                                  <Typography variant="h5" padding={1}>
-                                    WhatsApp
-                                  </Typography>
-                                </Button>
-                              </Grid>
-                            </Box>
-                          </Grid>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
+          margin: 'auto',
+          width: (w * .7),
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        }}
+      >
+        {/* Comtenido Pc */}
+        <CardContent sx={{
+          width: (w * .7),
+          p: 0,
+          margin: 'auto'
+        }}>
 
-              </Responsive>
+          <CardMedia >
+            <img
+              width={w * .7}
+              height={(w * .15)}
+              src={PortadaUser}
+              loading="lazy"
+              alt=""
+            />
 
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 0,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='column' paddingY={2}>
-                      <Grid item xs>
+          </CardMedia>
+          <Avatar
+            alt="Remy Sharp"
+            src={ImageUser}
+            sx={{
+              height: (w * .15),
+              width: (w * .15),
+              zIndex: 'tooltip',
+              mt: 5,
+              marginInline: (w * .035),
+            }}
+          />
+          <Paper
+            elevation={0}
+            sx={{
+              p: 2,
+              marginBottom: 3,
+              marginTop: 3,
+              margin: 'auto',
+              width: (w * .6),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Typography sx={{
 
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Grid item xs container direction='row' paddingX={1}>
-                            <Box sx={{ flexGrow: 1 }}>
-                              <Grid container spacing={2} padding={2}>
-                                <Grid item >
-                                  <AccountBoxIcon sx={{ fontSize: 40 }} />
-                                </Grid>
-                                <Grid item >
-                                  <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
-                                    Consultorio
-                                  </Typography>
-                                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                                    Piso 2, Consultorio 204
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                            </Box>
-                          </Grid>
-                        </Box>
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Grid item xs container direction='row' paddingX={1}>
-                            <Box sx={{ flexGrow: 1 }}>
-                              <Grid container spacing={2} padding={2}>
-                                <Grid item >
-                                  <ScheduleIcon sx={{ fontSize: 40 }} />
-                                </Grid>
-                                <Grid item >
-                                  <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
-                                    Consultorio
-                                  </Typography>
-                                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                                    Piso 2, Consultorio 204
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                            </Box>
-                          </Grid>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
+            }} variant="h4" fontSize="md" textAlign={'center'}>
+              Dr. Alberto Perez PC
+            </Typography>
+            <Typography sx={{
 
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 0,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='row' paddingX={0}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid xs item >
-                        <Typography variant="h5" fontWeight="md" padding={4} textColor="text.secondary">
-                          Servicios
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid xs item >
-                        <Button
-                          rounded
-                          text
-                          severity='secondary'
-
-                        >
-                          <ArrowDropDownIcon sx={{ fontSize: 80 }} />
-                        </Button>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 0,
-                    
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='column' paddingX={0}>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Grid item xs container direction='row' paddingX={0}>
-                          <Box sx={{ flexGrow: 1 }}>
-                            <Grid item >
-                              <Typography variant="h5" fontWeight="md" padding={3} textColor="text.secondary">
-                                Formación academica
-                              </Typography>
-                            </Grid>
-                          </Box>
-                          <Box sx={{ flexGrow: 0 }}>
-                            <Grid item >
-                              <Button
-                                rounded
-                                text
-                                severity='secondary'
-
-                              >
-                                <ArrowDropDownIcon sx={{ fontSize: 60 }} />
-                              </Button>
-                            </Grid>
-                          </Box>
-                        </Grid>
-                    </Box>                    
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h5' sx={{ margin: 2}}>
-                          Universidad
-                        </Typography>
-
-                      </Grid>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                          C. 35 #546 x 46 y 48 Col. Alguna Colonia
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                          Dato Libre
-                        </Typography>
-                        <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                          Dato Libre
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-            </CardContent>
-
-            {/* Contenido Laptop */}
-            <CardContent sx={{
-              display: {
-                mobile: 'none',
-                laptop: 'block',
-                desktop: 'none'
-              }
-            }}>
-              <Responsive >
-
-                <Typography sx={{
-                  margin: 1,
-                  marginBottom: 3,
-                  display: {
-                    mobile: 'none',
-                    laptop: 'block',
-                    desktop: 'none'
-                  }
-                }} variant="h4" fontSize="md" textAlign={'center'}>
-                  Dr. Marcos Laptop
-                </Typography>
-
-              </Responsive>
-              {/* <Typography variant="h3" fontSize="md" textAlign={'center'}>
-                      {w} px
-                    </Typography> */}
-
-              <Responsive >
-                <Typography sx={{
-                  margin: 1,
-                  marginBottom: 3,
-                  color: 'primary.main',
-                  display: {
-                    mobile: 'none',
-                    laptop: 'block',
-                    desktop: 'none'
-                  }
-                }} variant="h4" fontSize="md" textAlign={'center'}>
-                  Medicina Interna / Medicina Critica / Terapia intensiva
-                </Typography>
-              </Responsive>
-
-              <Divider />
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 3,
-                    margin: 'auto',
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="row" spacing={5}>
-                      <Grid item xs>
-                        <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
-                      <Grid item xs>
-                        <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="column" spacing={5}>
-                      <Grid item xs>
-                        <Typography variant="h5" fontSize="md" textAlign={'left'} >
-                          Especialista en diagnostico y tratamiento médico, asi como el seguimiento de enfermedades, crónicas y sus complicaciones
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='row' paddingX={25}>
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Grid item >
-                          <Button
-                            rounded
-                            outlined
-                            severity='info'
-                            raised
-                            loading={loadingCall} onClick={loadC}
-                          >
-                            <LocalPhoneIcon sx={{ fontSize: 40 }} color="white" />
-                            <Typography variant="h4" padding={1} >
-                              Llamar
-                            </Typography>
-
-                          </Button>
-                        </Grid>
-                      </Box>
-                      <Box sx={{ flexGrow: 0 }}>
-                        <Grid item >
-                          <Button
-                            outlined
-                            rounded
-                            severity='secondary'
-                            raised
-                            loading={loadingWP} onClick={loadW}
-
-                          >
-                            <WhatsAppIcon sx={{ fontSize: 40 }} color="success" />
-                            <Typography variant="h4" padding={1}>
-                              WhatsApp
-                            </Typography>
-                          </Button>
-                        </Grid>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='row' paddingX={1}>
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2} padding={2}>
-                          <Grid item >
-                            <AccountBoxIcon sx={{ fontSize: 50 }} />
-                          </Grid>
-                          <Grid item >
-                            <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
-                              Consultorio
-                            </Typography>
-                            <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                              Piso 2, Consultorio 204
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2} padding={2}>
-                          <Grid item >
-                            <ScheduleIcon sx={{ fontSize: 50 }} />
-                          </Grid>
-                          <Grid item >
-                            <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
-                              Horario
-                            </Typography>
-                            <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                              Lunes a Viernes | 9:00 am - 5:00 pm
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 1,
-
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='row' paddingX={3}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid item >
-                        <Typography variant="h4" fontWeight="lg" padding={4} textColor="text.secondary">
-                          Servicios
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid item >
-                        <Button
-                          rounded
-                          text
-                          severity='secondary'
-
-                        >
-                          <ArrowDropDownIcon sx={{ fontSize: 80 }} />
-                        </Button>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'block',
-                      desktop: 'none'
-                    },
-                    p: 1,
-                    
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='row' paddingX={3}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid item >
-                        <Typography variant="h4" fontWeight="lg" padding={4} textColor="text.secondary">
-                          Formación academica
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid item >
-                        <Button
-                          rounded
-                          text
-                          severity='secondary'
-
-                        >
-                          <ArrowDropDownIcon sx={{ fontSize: 80 }} />
-                        </Button>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-            </CardContent>
-
-            <CardContent sx={{
-              margin: 13,
+              marginBottom: 3,
+              color: 'primary.main',
               display: {
                 mobile: 'none',
                 laptop: 'none',
                 desktop: 'block'
               }
-            }}>
-              <Responsive >
-                <Typography sx={{
-                  margin: 1,
-                  display: {
-                    mobile: 'none',
-                    laptop: 'none',
-                    desktop: 'block'
-                  }
-                }} variant="h3" fontSize="md" textAlign={'center'}>
-                  Dr. Marcos PC
-                </Typography>
-              </Responsive>
+            }} variant="h5" fontSize="md" textAlign={'center'}>
+              Medicina Interna / Medicina Critica / Terapia intensiva
+            </Typography>
+          </Paper>
 
-              <Responsive >
-                <Typography sx={{
-                  margin: 1,
-                  marginBottom: 3,
-                  color: 'primary.main',
-                  display: {
-                    mobile: 'none',
-                    laptop: 'none',
-                    desktop: 'block'
-                  }
-                }} variant="h3" fontSize="md" textAlign={'center'}>
-                  Medicina Interna / Medicina Critica / Terapia intensiva
-                </Typography>
-              </Responsive>
 
-              <Divider />
+          <Divider />
 
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    margin: 'auto',
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="row" spacing={10}>
-                      <Grid item xs>
-                        <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
-                      <Grid item xs>
-                        <Typography xsgutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
-                        </Typography>
-                      </Grid>
+
+          {/* CEDULA */}
+          <Paper
+            sx={{
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs={12} container direction="row" spacing={5}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                    Cedula Especialidad 516164 / 51651
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                    Cedula Especialidad 516164 / 51651
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+
+
+          {/* DESCRIPCION */}
+          <Paper
+            sx={{
+              display: {
+                mobile: 'none',
+                laptop: 'none',
+                desktop: 'block'
+              },
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs={12} container direction="column" spacing={5}>
+                <Grid item xs>
+                  <Typography variant="h6" fontSize="md" textAlign={'left'} >
+                    Especialista en diagnostico y tratamiento médico, asi como el seguimiento de enfermedades, crónicas y sus complicaciones
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+
+
+
+          {/* Botones */}
+          <Paper
+            sx={{
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid container >
+              <Grid item xs container direction='row' paddingX={10}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid item >
+                    <Button
+                      rounded
+                      outlined
+                      severity='info'
+                      raised
+                      loading={loadingCall} onClick={loadC}
+                    >
+                      <LocalPhoneIcon sx={{ fontSize: 40 }} color="white" />
+                      <Typography variant="h5" padding={1} >
+                        Llamar
+                      </Typography>
+
+                    </Button>
+                  </Grid>
+                </Box>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Grid item >
+                    <Button
+                      outlined
+                      rounded
+                      severity='secondary'
+                      raised
+                      loading={loadingWP} onClick={loadW}
+
+                    >
+                      <WhatsAppIcon sx={{ fontSize: 40 }} color="success" />
+                      <Typography variant="h5" padding={1}>
+                        WhatsApp
+                      </Typography>
+                    </Button>
+                  </Grid>
+                </Box>
+              </Grid>
+            </Grid>
+          </Paper>
+
+
+
+          {/* Horarios */}
+          <Paper
+            sx={{
+              display: {
+                mobile: 'none',
+                laptop: 'none',
+                desktop: 'block'
+              },
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid item xs container direction='row' paddingX={3}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2} >
+                  <Grid item >
+                    <AccountBoxIcon sx={{ fontSize: 60 }} />
+                  </Grid>
+                  <Grid item >
+                    <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
+                      Consultorio
+                    </Typography>
+                    <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                      Piso 2, Consultorio 204
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2} padding={2}>
+                  <Grid item >
+                    <ScheduleIcon sx={{ fontSize: 60 }} />
+                  </Grid>
+                  <Grid item >
+                    <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
+                      Horario
+                    </Typography>
+                    <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                      Lunes a Viernes | 9:00 am - 5:00 pm
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+          </Paper>
+
+
+
+          {/* Servicios */}
+          <Paper
+            sx={{
+              display: {
+                mobile: 'none',
+                laptop: 'none',
+                desktop: 'block'
+              },
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid item xs container direction='row' paddingX={3}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2} >
+                  <Grid item >
+                    <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
+                      Servicios
+                    </Typography>
+                  </Grid>
+                  <Grid item >
+                    <Button
+                      rounded
+                      text
+                      severity='secondary'
+
+                    >
+                      <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                  <Grid item >
+                    <ScheduleIcon sx={{ fontSize: 60 }} />
+                  </Grid>
+                  <Grid item >
+                    <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
+                      Horario
+                    </Typography>
+                    <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                      Lunes a Viernes | 9:00 am - 5:00 pm
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+            <Grid item xs container direction='row' paddingX={3}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid item >
+                  <Typography variant="h4" fontWeight="md" textColor="text.secondary">
+                    Servicios
+                  </Typography>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid item >
+                  <Button
+                    rounded
+                    text
+                    severity='secondary'
+
+                  >
+                    <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                  </Button>
+                </Grid>
+              </Box>
+            </Grid>
+          </Paper>
+
+
+
+          {/* Formacion Academica */}
+          <Paper
+            sx={{
+              display: {
+                mobile: 'none',
+                laptop: 'none',
+                desktop: 'block'
+              },
+              p: 3,
+              margin: 'auto',
+              marginBlock: 2,
+              maxWidth: (w * .65),
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+          >
+            <Grid item xs container direction='column' paddingX={1}>
+              <Box sx={{ flexGrow: 0 }}>
+                <Grid item xs container direction='row' paddingX={0}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid item >
+                      <Typography variant="h4" fontWeight="md" padding={4} textColor="text.secondary">
+                        Formación academica
+                      </Typography>
                     </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
+                  </Box>
+                  <Box sx={{ flexGrow: 0 }}>
+                    <Grid item >
+                      <Button
+                        rounded
+                        text
+                        severity='secondary'
 
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs={12} container direction="column" spacing={5}>
-                      <Grid item xs>
-                        <Typography variant="h4" fontSize="md" textAlign={'left'} >
-                          Especialista en diagnostico y tratamiento médico, asi como el seguimiento de enfermedades, crónicas y sus complicaciones
-                        </Typography>
-                      </Grid>
+                      >
+                        <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                      </Button>
                     </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
+                  </Box>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h4' sx={{ margin: 2 }}>
+                    Universidad
+                  </Typography>
 
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 3,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='row' paddingX={35}>
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Grid item >
-                          <Button
-                            rounded
-                            outlined
-                            severity='info'
-                            raised
-                            loading={loadingCall} onClick={loadC}
-                          >
-                            <LocalPhoneIcon sx={{ fontSize: 40 }} color="white" />
-                            <Typography variant="h4" padding={1} >
-                              Llamar
-                            </Typography>
+                </Grid>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                    C. 35 #546 x 46 y 48 Col. Alguna Colonia
+                  </Typography>
+                </Grid>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Grid item paddingX={4}>
+                  <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                    Dato Libre
+                  </Typography>
+                  <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
+                    Dato Libre
+                  </Typography>
+                </Grid>
+              </Box>
+            </Grid>
+          </Paper>
 
-                          </Button>
-                        </Grid>
-                      </Box>
-                      <Box sx={{ flexGrow: 0 }}>
-                        <Grid item >
-                          <Button
-                            outlined
-                            rounded
-                            severity='secondary'
-                            raised
-                            loading={loadingWP} onClick={loadW}
+        </CardContent>
 
-                          >
-                            <WhatsAppIcon sx={{ fontSize: 40 }} color="success" />
-                            <Typography variant="h4" padding={1}>
-                              WhatsApp
-                            </Typography>
-                          </Button>
-                        </Grid>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Responsive>
+      </Paper>
 
-              <Responsive>
-                {/* DESCRIPCION */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 1,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='row' paddingX={3}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid container spacing={2} padding={2}>
-                        <Grid item >
-                          <AccountBoxIcon sx={{ fontSize: 60 }} />
-                        </Grid>
-                        <Grid item >
-                          <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
-                            Consultorio
-                          </Typography>
-                          <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                            Piso 2, Consultorio 204
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid container spacing={2} padding={2}>
-                        <Grid item >
-                          <ScheduleIcon sx={{ fontSize: 60 }} />
-                        </Grid>
-                        <Grid item >
-                          <Typography fontSize="md" variant='h4' sx={{ margin: 1 }}>
-                            Horario
-                          </Typography>
-                          <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                            Lunes a Viernes | 9:00 am - 5:00 pm
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Grid>
-
-                </Paper>
-              </Responsive>
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 1,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='row' paddingX={3}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid item >
-                        <Typography variant="h4" fontWeight="md" padding={4} textColor="text.secondary">
-                          Servicios
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid item >
-                        <Button
-                          rounded
-                          text
-                          severity='secondary'
-
-                        >
-                          <ArrowDropDownIcon sx={{ fontSize: 80 }} />
-                        </Button>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-
-              <Responsive >
-                {/* CEDULA */}
-                <Paper
-                  sx={{
-                    display: {
-                      mobile: 'none',
-                      laptop: 'none',
-                      desktop: 'block'
-                    },
-                    p: 1,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid item xs container direction='column' paddingX={1}>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Grid item xs container direction='row' paddingX={0}>
-                          <Box sx={{ flexGrow: 1 }}>
-                            <Grid item >
-                              <Typography variant="h4" fontWeight="md" padding={4} textColor="text.secondary">
-                                Formación academica
-                              </Typography>
-                            </Grid>
-                          </Box>
-                          <Box sx={{ flexGrow: 0 }}>
-                            <Grid item >
-                              <Button
-                                rounded
-                                text
-                                severity='secondary'
-
-                              >
-                                <ArrowDropDownIcon sx={{ fontSize: 80 }} />
-                              </Button>
-                            </Grid>
-                          </Box>
-                        </Grid>
-                    </Box>                    
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h4' sx={{ margin: 2}}>
-                          Universidad
-                        </Typography>
-
-                      </Grid>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                          C. 35 #546 x 46 y 48 Col. Alguna Colonia
-                        </Typography>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Grid item paddingX={4}>
-                        <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                          Dato Libre
-                        </Typography>
-                        <Typography fontSize="md" variant='h5' sx={{ color: 'primary.main', margin: 2 }}>
-                          Dato Libre
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Paper>
-              </Responsive>
-            </CardContent>                     
-          </Card>
-        </Paper>
-      </Responsive>
     </ThemeProvider>
 
   )

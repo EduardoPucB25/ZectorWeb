@@ -13,12 +13,13 @@ import { theme } from './responsiveAreas';
 
 // IMPORTS PRIMEREACT
 import { Button } from 'primereact/button';
-import { useFormRegister } from '../../../../hooks/use-form-register';
 
 // import ImageUser from '../../../../assets/images/doctor3.png'
-import ImageUser from '../../../../assets/images/doctor1.jpg'
+import ImageDr1 from '../../../assets/images/doctor1.jpg'
+import ImageDr2 from '../../../assets/images/doctor2.jpg'
 
-import PortadaUser from '../../../../assets/images/portada2.jpg'
+
+import PortadaUser from '../../../assets/images/portada2.jpg'
 
 // Icons mui
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
@@ -29,7 +30,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { grey, red, blue } from '@mui/material/colors';
-import { Girl } from '@mui/icons-material';
+
 
 const Img = styled('img')({
   margin: 'auto',
@@ -85,12 +86,11 @@ export const Areas = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Responsive >
+      
         <Paper
           sx={{
             p: 0,
             margin: 'auto',
-            widht: {},
             flexGrow: 1,
             backgroundColor: (theme) =>
               theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -116,17 +116,17 @@ export const Areas = () => {
                 laptop: 'none'
               }
             }}>
-              <Responsive >
+              
                 <Typography sx={{
                   margin: 1,
                   display: {
                     laptop: 'none'
                   }
                 }} variant="h5" fontSize="sm" textAlign={'center'} >
-                  Consultorio 200
+                  Consultorio 204
                 </Typography>
-              </Responsive>
-              <Responsive >
+              
+              
                 <Typography sx={{
                   margin: 1,
                   marginBottom: 3,
@@ -134,57 +134,111 @@ export const Areas = () => {
                   display: {
                     laptop: 'none'
                   }
-                }} variant="h6" fontSize="sm" textAlign={'center'} >
+                }} variant="body1" fontSize="sm" textAlign={'center'} >
                   Bienvenido a consultorio 200, seleccione su médico para mayor información
                 </Typography>
-              </Responsive>
+              
               <Divider />
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
                     display: {
                       laptop: 'none'
                     },
-                    p: 3,
+                    p: 0,
                     margin: 'auto',
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
+                    marginBlock: 2,
+                    marginTop: 2,
                     flexGrow: 1,
+                  }}
+                >
+                    <Grid xs container direction="row" >
+                      <Box item xs
+                        sx={{
+                          margin: 2
+                        }}>
+                      <Avatar
+                          alt="Remy Sharp"
+                          src={ImageDr1}
+                          sx={{
+                            height: 50,
+                            width: 50,
+                            zIndex: 'tooltip',     
+                          }}
+                        />
+                      </Box>
+                      <Box item xs
+                        sx={{
+                          margin: 1
+                        }}>                      
+                        <Typography gutterBottom variant="h6" fontSize="sm" textAlign={'center'} sx={{ color: 'gray' }}>
+                          Dr. Alberto Perez 
+                        </Typography>
+                        <Typography gutterBottom variant="body1" fontSize="sm" textAlign={'left'} sx={{ color: 'gray' }}>
+                           Medicina interna 
+                        </Typography>
+                        <Typography gutterBottom variant="body1" fontSize="sm" textAlign={'left'} sx={{ color: 'gray' }}>
+                           Terapia Intensiva
+                        </Typography>
+                      </Box>
+                      <Box item xs
+                        sx={{
+                          margin: 2
+                        }}>                      
+
+                      </Box>
+                    </Grid>
+                </Paper>
+
+
+
+                <Paper
+                  sx={{
+                    display: {
+                      laptop: 'none'
+                    },
+                    p: 0,
+                    margin: 'auto',
+                    marginBlock: 2,
                     backgroundColor: (theme) =>
                       theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                   }}
                 >
-                  
-                    <Grid xs={12} container direction="row" >
-                      <Grid item xs>
+                    <Grid xs container direction="row" >
+                      <Box item 
+                        sx={{
+                          margin: 2
+                        }}>
                       <Avatar
                           alt="Remy Sharp"
-                          src={ImageUser}
+                          src={ImageDr2}
                           sx={{
-                            height: (w * .20),
-                            width: (w * .20),
-                            zIndex: 'tooltip',
-                            mt: (-w * .010),
-                            marginInline: (w * .048),
-
+                            height: 50,
+                            width: 50,
+                            zIndex: 'tooltip',     
                           }}
                         />
-                      </Grid>
-                      <Grid item xs>
+                      </Box>
+                      <Box item 
+                        sx={{
+                          margin: 2
+                        }}>                      
                         <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
-                          Cedula Especialidad 516164 / 51651
+                          Dra. Alejandra Caceres 
                         </Typography>
-                      </Grid>
+                        <Typography gutterBottom variant="body1" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                           Especialista en pediatria
+                        </Typography>
+                      </Box>
                     </Grid>
-                  
                 </Paper>
-              </Responsive>
 
-              <Responsive>
+              
+
+              
                 
-                <Paper
+                {/* <Paper
                   sx={{
                     display: {
                       laptop: 'none'
@@ -208,74 +262,8 @@ export const Areas = () => {
                       </Grid>
                     </Grid>
                   </Grid>
-                </Paper>
-              </Responsive>
-              <Responsive>
-                
-                <Paper
-                  sx={{
-                    display: {
-                      laptop: 'none'
-                    },
-                    p: 0,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                >
-                  <Grid container >
-                    <Grid item xs container direction='column' paddingX={4}>
-                      <Grid item xs>
-
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Grid item container direction={'row'}  >
-                            <Box sx={{ flexGrow: 1, padding: 2 }}>
-                              <Grid item paddingX={9}>
-                                <Button
-                                  rounded
-                                  outlined
-                                  severity='info'
-                                  raised
-                                  loading={loadingCall} onClick={loadC}
-                                >
-                                  <LocalPhoneIcon sx={{ fontSize: 25 }} color="white" />
-                                  <Typography variant="h5" padding={1} >
-                                    Llamar
-                                  </Typography>
-
-                                </Button>
-                              </Grid>
-                            </Box>
-                            <Box sx={{ flexGrow: 1, padding: 2 }}>
-                              <Grid item paddingX={7}>
-                                <Button
-                                  outlined
-                                  rounded
-                                  severity='secondary'
-                                  raised
-                                  loading={loadingWP} onClick={loadW}
-
-                                >
-                                  <WhatsAppIcon sx={{ fontSize: 25 }} color="success" />
-                                  <Typography variant="h5" padding={1}>
-                                    WhatsApp
-                                  </Typography>
-                                </Button>
-                              </Grid>
-                            </Box>
-                          </Grid>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
-
-              </Responsive>
-
-              <Responsive>
+                </Paper> */}
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -283,18 +271,15 @@ export const Areas = () => {
                       laptop: 'none'
                     },
                     p: 0,
-                    marginBottom: 3,
-                    marginTop: 3,
-                    maxWidth: { w },
-                    flexGrow: 1,
+                    marginBlock: 3,
+                    marginTop: 2,
                     backgroundColor: (theme) =>
                       theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                   }}
                 >
                   <Grid container >
-                    <Grid item xs container direction='column' paddingY={2}>
+                    <Grid item xs container direction='column' paddingY={0}>
                       <Grid item xs>
-
                         <Box sx={{ flexGrow: 1 }}>
                           <Grid item xs container direction='row' paddingX={1}>
                             <Box sx={{ flexGrow: 1 }}>
@@ -303,10 +288,10 @@ export const Areas = () => {
                                   <AccountBoxIcon sx={{ fontSize: 40 }} />
                                 </Grid>
                                 <Grid item >
-                                  <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
+                                  <Typography fontSize="md" variant='h6' sx={{ margin: 1 }}>
                                     Consultorio
                                   </Typography>
-                                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
+                                  <Typography fontSize="md" variant='body1' sx={{ color: 'primary.main', margin: 1 }}>
                                     Piso 2, Consultorio 204
                                   </Typography>
                                 </Grid>
@@ -323,10 +308,16 @@ export const Areas = () => {
                                 </Grid>
                                 <Grid item >
                                   <Typography fontSize="md" variant='h5' sx={{ margin: 1 }}>
-                                    Consultorio
+                                    Horarios
                                   </Typography>
-                                  <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                                    Piso 2, Consultorio 204
+                                  <Typography fontSize="md" variant='body1' sx={{ margin: 1 }}>
+                                    Cita previa
+                                  </Typography>
+                                  <Typography fontSize="md" variant='body1' sx={{ color: 'primary.main', margin: 2 }}>
+                                    10:00 am - 2:00 pm
+                                  </Typography>
+                                  <Typography fontSize="md" variant='body1' sx={{ color: 'primary.main', margin: 2 }}>
+                                     4:00 pm - 6:00 pm
                                   </Typography>
                                 </Grid>
                               </Grid>
@@ -337,9 +328,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -371,15 +362,15 @@ export const Areas = () => {
                           severity='secondary'
 
                         >
-                          <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                          <ArrowDropDownIcon sx={{ fontSize: 60 }} />
                         </Button>
                       </Grid>
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -402,7 +393,7 @@ export const Areas = () => {
                           <Box sx={{ flexGrow: 1 }}>
                             <Grid item >
                               <Typography variant="h5" fontWeight="md" padding={3} textColor="text.secondary">
-                                Formación academica
+                                Documentos y Avisos
                               </Typography>
                             </Grid>
                           </Box>
@@ -423,11 +414,22 @@ export const Areas = () => {
                     <Box sx={{ flexGrow: 1 }}>
                       <Grid item paddingX={4}>
                         <Typography fontSize="md" variant='h5' sx={{ margin: 2}}>
-                          Universidad
+                          Requisitos Previos a citas
                         </Typography>
 
                       </Grid>
                       <Grid item paddingX={4}>
+                      <Button
+                          rounded
+                          text
+                          severity='secondary'
+
+                        >
+                          <ArrowDropDownIcon sx={{ fontSize: 60 }} />
+                          <Typography fontSize="md" variant='h6' sx={{ color: 'severity', margin: 2 }}>
+                            Requisitos.PDF
+                          </Typography>              
+                        </Button>
                         <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
                           C. 35 #546 x 46 y 48 Col. Alguna Colonia
                         </Typography>
@@ -436,7 +438,7 @@ export const Areas = () => {
                     <Box sx={{ flexGrow: 0 }}>
                       <Grid item paddingX={4}>
                         <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
-                          Dato Libre
+                          Realizar 
                         </Typography>
                         <Typography fontSize="md" variant='h6' sx={{ color: 'primary.main', margin: 2 }}>
                           Dato Libre
@@ -445,7 +447,7 @@ export const Areas = () => {
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
             </CardContent>
 
             {/* Contenido Laptop */}
@@ -456,7 +458,7 @@ export const Areas = () => {
                 desktop: 'none'
               }
             }}>
-              <Responsive >
+              
 
                 <Typography sx={{
                   margin: 1,
@@ -470,12 +472,12 @@ export const Areas = () => {
                   Dr. Marcos Laptop
                 </Typography>
 
-              </Responsive>
+              
               {/* <Typography variant="h3" fontSize="md" textAlign={'center'}>
                       {w} px
                     </Typography> */}
 
-              <Responsive >
+              
                 <Typography sx={{
                   margin: 1,
                   marginBottom: 3,
@@ -488,11 +490,11 @@ export const Areas = () => {
                 }} variant="h4" fontSize="md" textAlign={'center'}>
                   Medicina Interna / Medicina Critica / Terapia intensiva
                 </Typography>
-              </Responsive>
+              
 
               <Divider />
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -519,16 +521,16 @@ export const Areas = () => {
                         </Typography>
                       </Grid>
                       <Grid item xs>
-                        <Typography xsgutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
+                        <Typography xs gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'gray' }}>
                           Cedula Especialidad 516164 / 51651
                         </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -556,9 +558,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -615,9 +617,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -670,9 +672,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -713,9 +715,9 @@ export const Areas = () => {
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -756,7 +758,7 @@ export const Areas = () => {
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
             </CardContent>
 
             <CardContent sx={{
@@ -767,7 +769,7 @@ export const Areas = () => {
                 desktop: 'block'
               }
             }}>
-              <Responsive >
+              
                 <Typography sx={{
                   margin: 1,
                   display: {
@@ -778,9 +780,9 @@ export const Areas = () => {
                 }} variant="h3" fontSize="md" textAlign={'center'}>
                   Dr. Marcos PC
                 </Typography>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 <Typography sx={{
                   margin: 1,
                   marginBottom: 3,
@@ -793,11 +795,11 @@ export const Areas = () => {
                 }} variant="h3" fontSize="md" textAlign={'center'}>
                   Medicina Interna / Medicina Critica / Terapia intensiva
                 </Typography>
-              </Responsive>
+              
 
               <Divider />
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -831,9 +833,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -861,9 +863,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -920,9 +922,9 @@ export const Areas = () => {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive>
+              
                 {/* DESCRIPCION */}
                 <Paper
                   sx={{
@@ -974,9 +976,9 @@ export const Areas = () => {
                   </Grid>
 
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -1016,9 +1018,9 @@ export const Areas = () => {
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
 
-              <Responsive >
+              
                 {/* CEDULA */}
                 <Paper
                   sx={{
@@ -1085,11 +1087,11 @@ export const Areas = () => {
                     </Box>
                   </Grid>
                 </Paper>
-              </Responsive>
+              
             </CardContent>                     
           </Card>
         </Paper>
-      </Responsive>
+      
     </ThemeProvider>
 
   )

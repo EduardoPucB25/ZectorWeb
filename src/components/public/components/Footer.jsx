@@ -20,24 +20,12 @@ export default function Footer() {
 
   const [w, setW] = useState(window.innerWidth);
   useEffect(() => {
-    const handleResizeW = () => {
+    const handleResize = () => {
       setW(window.innerWidth);
     };
-    window.addEventListener('resizew', handleResizeW);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener('resizew', handleResizeW);
-
-    };
-  }, []);
-
-  const [h, setH] = useState(window.innerHeight);
-  useEffect(() => {
-    const handleResizeH = () => {
-      setH(window.innerHeight);
-    };
-    window.addEventListener('resizeh', handleResizeH);
-    return () => {
-      window.removeEventListener('resizeh', handleResizeH);
+      window.removeEventListener('resize', handleResize);
 
     };
   }, []);
@@ -74,7 +62,7 @@ export default function Footer() {
             },
             p: 2,
             margin: 'auto',
-            maxWidth: { w },
+            width: w,
             flexGrow: 1,
             backgroundColor: (theme) =>
               theme.palette.mode === 'dark' ? '#1A2027' : '#1f3c59',
@@ -83,7 +71,7 @@ export default function Footer() {
           <Grid container >
             <Grid item xs={12} container direction="column" spacing={2}>
               <Grid item xs container direction='row' spacing={1}>
-                <Box sx={{ flexGrow: 1}}>
+                <Box sx={{ flexGrow: 1 }}>
                   <Grid item >
                     <Typography gutterBottom variant="body1" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                       Numero de contacto
@@ -95,7 +83,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid item >
-                  <Typography gutterBottom variant="body1" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                    <Typography gutterBottom variant="body1" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                       Numero de contacto
                     </Typography>
                     <Typography gutterBottom variant="body1" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
@@ -105,12 +93,12 @@ export default function Footer() {
                 </Box>
               </Grid>
               <Grid item xs>
-                <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                   Redes Sociales
                 </Typography>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Grid item container direction={'row'}  paddingX={10}>
-                    <Box sx={{ flexGrow: 1}}>
+                  <Grid item container direction={'row'} paddingX={10}>
+                    <Box sx={{ flexGrow: 1 }}>
                       <Button
                         rounded
                         severity='info'
@@ -121,7 +109,7 @@ export default function Footer() {
                       <Grid item >
                       </Grid>
                     </Box>
-                    <Box sx={{ flexGrow: 1}}>
+                    <Box sx={{ flexGrow: 1 }}>
                       <Grid item >
                         <Button
                           rounded
@@ -132,7 +120,7 @@ export default function Footer() {
                         </Button>
                       </Grid>
                     </Box>
-                    <Box sx={{ flexGrow: 0}}>
+                    <Box sx={{ flexGrow: 0 }}>
                       <Grid item >
                         <Button
                           rounded
@@ -148,7 +136,7 @@ export default function Footer() {
               </Grid>
 
               <Grid item xs>
-                <Typography gutterBottom variant="h6" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                   www.zector/cmaOficial.com Mobile
                 </Typography>
               </Grid>
@@ -164,9 +152,8 @@ export default function Footer() {
               desktop: 'none'
             },
             p: 3,
-
             margin: 'auto',
-            maxWidth: { w },
+            width: w,
             flexGrow: 1,
             backgroundColor: (theme) =>
               theme.palette.mode === 'dark' ? '#1A2027' : '#1f3c59',
@@ -175,7 +162,7 @@ export default function Footer() {
           <Grid container >
             <Grid item xs={12} container direction="column" spacing={2}>
               <Grid item xs container direction='row' spacing={1}>
-                <Box sx={{ flexGrow: 1}}>
+                <Box sx={{ flexGrow: 1 }}>
                   <Grid item >
                     <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                       Numero de contacto
@@ -187,7 +174,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid item >
-                  <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                    <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
                       Numero de contacto
                     </Typography>
                     <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
@@ -201,8 +188,8 @@ export default function Footer() {
                   Redes Sociales
                 </Typography>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Grid item container direction={'row'}  paddingX={40}>
-                    <Box sx={{ flexGrow: 1}}>
+                  <Grid item container direction={'row'} paddingX={40}>
+                    <Box sx={{ flexGrow: 1 }}>
                       <Button
                         rounded
                         severity='info'
@@ -213,7 +200,7 @@ export default function Footer() {
                       <Grid item >
                       </Grid>
                     </Box>
-                    <Box sx={{ flexGrow: 1}}>
+                    <Box sx={{ flexGrow: 1 }}>
                       <Grid item >
                         <Button
                           rounded
@@ -224,7 +211,7 @@ export default function Footer() {
                         </Button>
                       </Grid>
                     </Box>
-                    <Box sx={{ flexGrow: 0}}>
+                    <Box sx={{ flexGrow: 0 }}>
                       <Grid item >
                         <Button
                           rounded
@@ -255,10 +242,10 @@ export default function Footer() {
               laptop: 'none',
               desktop: 'block'
             },
-            p: 5,
+            p: 3,
             margin: 'auto',
-            maxWidth: { w },
-            maxHeight: ( h* 0.30),
+            width: ( w * .7),
+            height: (w * .15),
             flexGrow: 1,
             backgroundColor: (theme) =>
               theme.palette.mode === 'dark' ? '#1A2027' : '#1f3c59',
@@ -266,82 +253,127 @@ export default function Footer() {
         >
           <Grid container >
             <Grid item xs={12} container direction="column" >
-              <Grid item xs container direction='row' >
-                <Box sx={{ flexGrow: 1}}>
-                  <Grid item >
-                    <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                      Numero de contacto
-                    </Typography>
-                    <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                      9994654661
-                    </Typography>
-                  </Grid>
-                </Box>
+              <Grid item xs container direction='row' padding={1}>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Grid item >
-                  <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                      Numero de contacto
-                    </Typography>
-                    <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                      9994654661
-                    </Typography>
-                  </Grid>
+
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    Numero de contacto
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    9994654661
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    Numero de contacto
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    9994654661
+                  </Typography>
+
                 </Box>
-              </Grid>
-              <Grid item xs>
-                <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                  Redes Sociales
-                </Typography>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Grid item container direction={'row'}  paddingX={20}>
-                    <Box sx={{ flexGrow: 1}}>
-                      <Button
-                        rounded
-                        severity='info'
-                        raised
-                      >
-                        <FacebookIcon sx={{ fontSize: 30 }} />
-                        <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                          @facebook
+                <Box sx={{ flexGrow: 1, textAlign: 'left' }}>
+
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    Quienes somos
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    Datos de desarrollador
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+                    developer.312@outlook.com
+                  </Typography>
+                  <Typography gutterBottom variant="body2" fontSize="md" sx={{ color: 'white' }}>
+
+                  </Typography>
+
+                </Box>
+
+                <Box sx={{ flexGrow: 0 }}>
+                        <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                          Redes Sociales
                         </Typography>
-                      </Button>
-                      <Grid item >
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 1}}>
-                      <Grid item >
+                      <Grid item container direction={'row'} paddingX={0}>
                         <Button
                           rounded
                           severity='danger'
                           raised
                         >
-                          <InstagramIcon sx={{ fontSize: 30 }} />
-                          <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                            @instagram
-                        </Typography>
+                          <InstagramIcon sx={{ fontSize: 25 }} />
+
                         </Button>
-                      </Grid>
-                    </Box>
-                    <Box sx={{ flexGrow: 0}}>
-                      <Grid item >
+                        <Button
+                          rounded
+                          severity='info'
+                          raised
+                        >
+                          <FacebookIcon sx={{ fontSize: 20 }} />
+
+                        </Button>
                         <Button
                           rounded
                           severity='success'
                           raised
                         >
-                          <WhatsAppIcon sx={{ fontSize: 30 }} />
-                          <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
-                            @WhatsApp
-                          </Typography> 
+                          <WhatsAppIcon sx={{ fontSize: 25 }} />
+
+                        </Button>
+                      </Grid>
+                    </Box>
+
+              </Grid>
+
+              {/* <Grid item xs padding={1}>
+                <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                  Información
+                </Typography>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid item container direction={'row'} paddingX={30}>
+                    <Box sx={{ flexGrow: 1 }}>
+
+
+                    </Box>
+                    <Box sx={{ flexGrow: 1 }}>
+                      <Grid item >
+
+                      </Grid>
+                    </Box>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                          Redes Sociales
+                        </Typography>
+                      <Grid item container direction={'row'} paddingX={0}>
+                        <Button
+                          rounded
+                          severity='danger'
+                          raised
+                        >
+                          <InstagramIcon sx={{ fontSize: 25 }} />
+
+                        </Button>
+                        <Button
+                          rounded
+                          severity='info'
+                          raised
+                        >
+                          <FacebookIcon sx={{ fontSize: 20 }} />
+
+                        </Button>
+                        <Button
+                          rounded
+                          severity='success'
+                          raised
+                        >
+                          <WhatsAppIcon sx={{ fontSize: 25 }} />
+
                         </Button>
                       </Grid>
                     </Box>
                   </Grid>
                 </Box>
-              </Grid>
+              </Grid> */}
 
               <Grid item xs>
-                <Typography gutterBottom variant="h5" fontSize="md" textAlign={'center'} sx={{ color: 'white' }}>
+                <Typography gutterBottom variant="body2" fontSize="md" textAlign={'center'} sx={{ color: 'white', padding: 1 }}>
                   www.zector/cmaOficial.com PC
                 </Typography>
               </Grid>

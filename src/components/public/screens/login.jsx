@@ -7,19 +7,25 @@ import Box from '@mui/joy/Box';
 import Link from '@mui/joy/Link';
 
 // IMPORTS PRIMEREACT
-
+import { useFormLogin } from '../../../hooks/use-form-login';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 
 export const Login = () => {
-
+  const {form, changed} = useFormLogin({});
   const [value, setValue] = useState('');
+
+  const validateUser = (e) =>{
+    e.preventDefault();
+    let newUser = form;
+    console.log(newUser);
+  }
 
   return (
     <div>
       <Paper
         sx={{
-          p: 20,
+          p: 5,
           margin: 'auto',
           maxWidth: '100%',
           maxHeight: '100%',
@@ -27,19 +33,16 @@ export const Login = () => {
           width: '100%',
           flexGrow: 1,
           backgroundColor: (theme) =>
-            theme.palette.mode === 'dark' ? '#1A2027' : '#9aa',
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
-        {/* CONTENEDOR MAYOR DE FORMULARIO */}
+        
         <Grid item sm xs={12} container >
 
           <Grid item container direction="column" sx>
-
-            {/* SECCION 1 DE FORMULARIO */}
             <Grid item>
               <Paper
                 sx={{
-
                   p: 5,
                   margin: 'auto',
                   maxWidth: 500,
@@ -52,7 +55,7 @@ export const Login = () => {
                 }}
               >
                 <Grid item sm xs={12} container>
-                  {/* FORMULARIO DE PERSONAL */}
+                  
                   <Grid item sm container direction="column" xs spacing={3} alignItems={'center'}>
                     <Grid item xs>
                       <Typography variant="h4" gutterBottom sx={{ minWidth: 200, marginTop: 2}}>
@@ -75,13 +78,13 @@ export const Login = () => {
                     </Grid>
 
 
-                    <Grid item xs={12} sm container direction='row' marginTop={2}>
+                    <Grid item xs={12} sm marginTop={2}>
                       <Grid item xs></Grid>
                         <Box
                             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
                           >
                             <Link
-                                href="homeAdmin"
+                                onClick={validateUser}
                                 underline="none"
                                 variant="solid"
                                 color="primary"
@@ -91,12 +94,8 @@ export const Login = () => {
                                 Ingresar
                             </Link>
                           </Box>
-                      <Grid item xs ></Grid>             
+                                
                     </Grid>
-
-
-
-
                   </Grid>
                 </Grid>
               </Paper>

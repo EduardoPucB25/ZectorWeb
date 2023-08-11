@@ -52,6 +52,9 @@ import ImgDr3 from '../../../assets/images/doctor3.png';
 import ImgDr4 from '../../../assets/images/doctor4.jpg';
 import ImgDr5 from '../../../assets/images/doctor5.jpg';
 import ImgDr6 from '../../../assets/images/doctor6.jpg';
+import Usuario from '../../../assets/images/usuario.png';
+
+
 // ICONS
 
 function TablePersonal(props) {
@@ -133,7 +136,7 @@ function GridFormEditarPersonal() {
     <div>
       <Paper
         sx={{
-          p: 1,
+          p: 2,
           margin: 'auto',
           maxWidth: 600,
           flexGrow: 1,
@@ -149,7 +152,7 @@ function GridFormEditarPersonal() {
             <Grid item>
               <Paper
                 sx={{
-                  p: 1,
+                  p: 2,
                   margin: 'auto',
                   maxWidth: 630,
                   flexGrow: 1,
@@ -169,7 +172,7 @@ function GridFormEditarPersonal() {
 
                     <Grid item sm direction="row" container spacing={4}>
                       <Grid item>
-                        <Avatar alt="complex" src={ImgDr1} sx={{ height: 60, width: 60 }} />
+                        <Avatar alt="complex" src={Usuario} sx={{ height: 60, width: 60 }} />
                       </Grid>
 
                       {/* Editar el label del selector de imagen  */}
@@ -317,6 +320,10 @@ function GridFormEditarPersonal() {
                         </Button>
                       </Grid>
                       <Grid item xs>
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">[999]-99-99-99</label>
+                        </Grid>
                       </Grid>
                     </Grid>
 
@@ -334,7 +341,10 @@ function GridFormEditarPersonal() {
                         </Button>
                       </Grid>
                       <Grid item xs>
-
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">example@correo.com</label>
+                        </Grid>
                       </Grid>
                     </Grid>
                     <Grid item xs container direction="row" spacing={1} >
@@ -351,7 +361,10 @@ function GridFormEditarPersonal() {
                         </Button>
                       </Grid>
                       <Grid item xs>
-
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">www.whatsapp.com</label>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -378,8 +391,31 @@ function GridFormEditarPersonal() {
                       </Typography>
                     </Grid>
                     <Grid item sm>
-
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ borderRadius: 15 }} />
+                          <label htmlFor="inputtext">Nombre Link</label>
+                        </Grid>
                     </Grid>
+                    <Grid item sm>
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">www.pagina.com</label>
+                        </Grid>                
+                    </Grid>
+
+                    <Grid item sm>
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ borderRadius: 15 }} />
+                          <label htmlFor="inputtext">Nombre Link</label>
+                        </Grid>
+                    </Grid>
+                    <Grid item sm>
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">www.pagina.com</label>
+                        </Grid>                
+                    </Grid>                     
+
                   </Grid>
                 </Grid>
               </Paper>
@@ -388,7 +424,7 @@ function GridFormEditarPersonal() {
             <Grid item>
               <Paper
                 sx={{
-                  p: 2,
+                  p: 3,
                   margin: 'auto',
                   maxWidth: 630,
                   flexGrow: 1,
@@ -396,15 +432,26 @@ function GridFormEditarPersonal() {
                     theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
                 }}
               >
-                <Grid container spacing={2}>
-                  <Grid item sm container direction="column" sx spacing={2}>
+                <Grid container spacing={0}>
+                  <Grid item sm container direction="column" sx spacing={3}>
                     <Grid item sm>
                       <Typography variant="h5" gutterBottom sx={{ minWidth: 200, marginTop: 1, textAlign: 'left' }}>
                         Servicios
                       </Typography>
                     </Grid>
                     <Grid item sm>
-
+                      
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ borderRadius: 15 }} />
+                          <label htmlFor="inputtext">Nombre del Servicio</label>
+                        </Grid>
+                      
+                      
+                        <Grid className="p-float-label">
+                          <InputText id="inputtext" style={{ width: '100%', borderRadius: 15 }} />
+                          <label htmlFor="inputtext">Servicio-1</label>
+                        </Grid>
+                      
                     </Grid>
                   </Grid>
                 </Grid>
@@ -467,8 +514,8 @@ function Row(props) {
   );
   const footerPersonalDinamico = (
     <div>
-      <Button label="Cancelar" icon="pi pi-times" onClick={() => verPerfilPersonal(false)} className="p-button-warning" />
-      <Button label="Enviar" icon="pi pi-check" onClick={() => verPerfilPersonal(false)} autoFocus className='p-button-success' />
+      <Button label="Cancelar" icon="pi pi-times" onClick={() => verPersonalDinamico(false)} className="p-button-warning" />
+      <Button label="Enviar" icon="pi pi-check" onClick={() => verPersonalDinamico(false)} autoFocus className='p-button-success' />
     </div>
   );
 
@@ -958,7 +1005,7 @@ export default class homeAdmin extends Component {
                     </Accordion>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                {/* <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -1013,99 +1060,8 @@ export default class homeAdmin extends Component {
                       Blog 1
                     </Typography>
                   </AccordionDetails>
-                </Accordion>
-                {/* <Accordion multiple contentEditable>
-                  <AccordionSummary header='Staff'>
-                    <Card >
-                      <CardActionArea >
-                          <Typography gutterBottom variant="h6" marginLeft={2}>
-                            Doctores
-                          </Typography>
-                      </CardActionArea>
-                    </Card>
-                    <Card >
-                      <CardActionArea >
-                          <Typography gutterBottom variant="h6" marginLeft={2}>
-                            Enfermeras
-                          </Typography>
-                      </CardActionArea>
-                    </Card>
-                    <Card >
-                      <CardActionArea >
-                          <Typography gutterBottom variant="h6" component="div" marginLeft={2}>
-                            Administrativo
-                          </Typography>
-                      </CardActionArea>
-                    </Card>
-
-                  </AccordionSummary>
-                  <AccordionSummary header='Zonas'>
-                    <Card >
-                      <CardActionArea >
-                          <Typography gutterBottom variant="h6"  marginLeft={2}>
-                          Camas Hospital
-                          </Typography>
-                      </CardActionArea>
-                    </Card>
-                    <Card >
-                      <CardActionArea >
-                          <Typography gutterBottom variant="h6"  marginLeft={2}>
-                          Consultorios
-                          </Typography>
-                      </CardActionArea>
-                    </Card>
-                  <Accordion  >
-                      <AccordionSummary header='Areas' >
-                        <Card >
-                          <CardActionArea >
-                              <Typography gutterBottom variant="h6" component="div" marginLeft={2}>
-                              Areas Comunes
-                              </Typography>
-                          </CardActionArea>
-                        </Card>
-                        <Card >
-                          <CardActionArea >
-                              <Typography gutterBottom variant="h6" component="div" marginLeft={2}>
-                                Banco de Sangre
-                              </Typography>
-                          </CardActionArea>
-                        </Card>
-                      </AccordionSummary>
-                    </Accordion>
-                  </AccordionSummary>
-                  <AccordionSummary header='Buzón'>
-                  <Accordion  >
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                    </Accordion>
-                  </AccordionSummary>
-                  <AccordionSummary header='Encuestas'>
-                  <Accordion  >
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                    </Accordion>
-                  </AccordionSummary>
-                  <AccordionSummary header='Anuncios'>
-                  <Accordion  >
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                    </Accordion>
-                  </AccordionSummary>
-                  <AccordionSummary header='Blog'>
-                  <Accordion  >
-                      <AccordionSummary header='hola' >
-                      </AccordionSummary>
-                    </Accordion>
-                  </AccordionSummary>
                 </Accordion> */}
+
                 <Box margin={1}>
                   <Button label='Agregar Módulo' icon={PrimeIcons.PLUS} rounded text severity="info" aria-label="User" />
                 </Box>

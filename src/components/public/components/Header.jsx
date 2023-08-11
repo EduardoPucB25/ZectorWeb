@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -13,13 +14,14 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { grey } from '@mui/material/colors';
 import imageDr from '../../../assets/images/doctor1.jpg'
+import { theme } from '../styles/responsiveScreens';
 
 export default function Header() {
 
   // NOMBRE DEL USUARIO
   const [w, setW] = useState(window.innerWidth);
   useEffect(() => {
-    const handleResize = () =>{
+    const handleResize = () => {
       setW(window.innerWidth);
     };
     window.addEventListener('resize', handleResize);
@@ -29,18 +31,18 @@ export default function Header() {
     };
   }, []);
 
-  const Responsive = styled('div')(({theme}) => ({
-    [theme.breakpoints.down('mobile')]:{
-      color:grey
+  const Responsive = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('mobile')]: {
+      color: grey
     },
-    [theme.breakpoints.down('table')]:{
-      color:grey
+    [theme.breakpoints.down('table')]: {
+      color: grey
     },
-    [theme.breakpoints.down('desktop')]:{
-      color:grey
+    [theme.breakpoints.down('desktop')]: {
+      color: grey
     }
   }))
-  
+
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -52,98 +54,291 @@ export default function Header() {
     setAnchorEl(null);
   };
   return (
-    <Responsive>
-      <Box
-        id='Header'  
-        sx={{ 
+    <ThemeProvider theme={theme}>
+      <Responsive sx={{
+        display: {
+          tablet: "none"
+          
+        }
+      }}>
+        <Box
+          id='Header'
+          sx={{
             margin: 'auto',
             display: 'flex',
             alignItems: 'center',
             textAlign: 'center',
             justifyContent: 'space-between',
-            width: {w},
+            width: w,
             height: 80,
             backgroundColor: '#1f3c59'
           }}>
-        {/* Consumir directo el nobre del hospital */}
+          {/* Consumir directo el nobre del hospital */}
           {/* Icono de CMA */}
 
-        <Typography variant="h6" color='white' gutterBottom sx={{ minWidth: 200, marginTop: 2, marginLeft: 30}}>
-           Centro médico de las Américas
-        </Typography>
+          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2 }}>
+            Centro médico de las Américas
+          </Typography>
 
 
-        <Tooltip title="Opciones">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{minWidth: 20}}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar sx={{ width: 50, height: 50, marginRight: 5}} src={imageDr}></Avatar>
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 40,
-              height: 40,
-              ml: -0.5,
-              mr: 1,
+          <Tooltip title="Opciones">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ minWidth: 20 }}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+            >
+              <Avatar sx={{ width: 50, height: 50, marginRight: 0 }} src={imageDr}></Avatar>
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 5px 8px rgba(0,0,0,0.32))',
+              mt: 8,
+              '& .MuiAvatar-root': {
+                width: 40,
+                height: 40,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&:before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 10,
+                width: 15,
+                height: 15,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
             },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 60,
-              width: 15,
-              height: 15,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
+          }}
+          transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Avatar src={imageDr} /> Perfil
+          </MenuItem>
+          <Divider />
+
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Opciones
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Salir
+          </MenuItem>
+        </Menu>
+      </Responsive>
+
+      <Responsive sx={{
+        display: {
+          mobile: "none",
+          desktop: "none",
+          laptop: "block"
+        }
+      }}>
+        <Box
+          id='Header'
+          sx={{
+            margin: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            textAlign: 'center',
+            justifyContent: 'space-between',
+            width: w,
+            height: 80,
+            backgroundColor: '#1f3c59'
+          }}>
+          {/* Consumir directo el nobre del hospital */}
+          {/* Icono de CMA */}
+
+          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2 }}>
+            Centro médico de las Américas
+          </Typography>
+
+
+          <Tooltip title="Opciones">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ minWidth: 20 }}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+            >
+              <Avatar sx={{ width: 50, height: 50, marginRight: 0 }} src={imageDr}></Avatar>
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 5px 8px rgba(0,0,0,0.32))',
+              mt: 8,
+              '& .MuiAvatar-root': {
+                width: 40,
+                height: 40,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&:before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 10,
+                width: 15,
+                height: 15,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
             },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <MenuItem onClick={handleClose}>
-          <Avatar src={imageDr}/> Perfil
-        </MenuItem>
-        <Divider />
-        {/* <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Agregar otra cuenta
-        </MenuItem> */}
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Opciones
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Salir
-        </MenuItem>
-      </Menu>
-    </Responsive>
+          }}
+          transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Avatar src={imageDr} /> Perfil
+          </MenuItem>
+          <Divider />
+
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Opciones
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Salir
+          </MenuItem>
+        </Menu>
+      </Responsive>
+
+      <Responsive sx={{
+        display: {
+          mobile: "none",
+          tablet: "none",
+          desktop: "block"
+        }
+      }}>
+        <Box
+          id='Header'
+          sx={{
+            margin: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            textAlign: 'center',
+            justifyContent: 'space-between',
+            width: ( w * .7),
+            height: 80,
+            backgroundColor: '#1f3c59'
+          }}>
+          {/* Consumir directo el nobre del hospital */}
+          {/* Icono de CMA */}
+
+          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2, ml: 4}}>
+            Centro médico de las Américas
+          </Typography>
+
+
+          <Tooltip title="Opciones">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ minWidth: 20 }}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+            >
+              <Avatar sx={{ width: 50, height: 50, mr: 4 }} src={imageDr}></Avatar>
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 5px 8px rgba(0,0,0,0.32))',
+              mt: 8,
+              '& .MuiAvatar-root': {
+                width: 40,
+                height: 40,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&:before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 10,
+                width: 15,
+                height: 15,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Avatar src={imageDr} /> Perfil
+          </MenuItem>
+          <Divider />
+
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Opciones
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Salir
+          </MenuItem>
+        </Menu>
+      </Responsive>
+    </ThemeProvider>
+
   );
 }

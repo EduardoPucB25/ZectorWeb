@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -15,7 +16,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
@@ -53,15 +55,20 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import { StaffService } from '../../../services/ProductService';
+import { StaffService } from '../../../services/StaffService';
+import { Dropdown } from 'primereact/dropdown';
 
-// import ImgDr1 from '../../../assets/images/doctor1.jpg';
-// import ImgDr2 from '../../../assets/images/doctor2.jpg';
-// import ImgDr3 from '../../../assets/images/doctor3.png';
-// import ImgDr4 from '../../../assets/images/doctor4.jpg';
-// import ImgDr5 from '../../../assets/images/doctor5.jpg';
-// import ImgDr6 from '../../../assets/images/doctor6.jpg';
+import ImgDr1 from '../../../assets/images/doctor1.jpg';
+import ImgDr2 from '../../../assets/images/doctor2.jpg';
+import ImgDr3 from '../../../assets/images/doctor3.png';
+import ImgDr4 from '../../../assets/images/doctor4.jpg';
+import ImgDr5 from '../../../assets/images/doctor5.jpg';
+import ImgDr6 from '../../../assets/images/doctor6.jpg';
+import cmaLogo from '../../../assets/images/cmaLogo.png';
+import cmaUser from '../../../assets/images/cmaUser.png';
 
+// PETICIONES API
+import { Global } from '../../../helpers/global'
 
 const drawerWidth = 290;
 const openedMixin = (theme) => ({
@@ -141,7 +148,6 @@ export default function HomeAdminMUI() {
     setOpen(false);
   };
 
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -153,28 +159,6 @@ export default function HomeAdminMUI() {
 
 
   const categoryStaff = [
-    { nombre: 'Doctores' },
-    { nombre: 'Enfermeras' },
-    { nombre: 'Administrativo' },
-  ]
-  const categoryZonas = [
-    { nombre: 'Camas Hospital' },
-    { nombre: 'Coultorios', },
-    { nombre: 'Areas' },
-  ]
-
-
-  const categoryBuzon = [
-    { nombre: 'Doctores' },
-    { nombre: 'Enfermeras' },
-    { nombre: 'Administrativo' },
-  ]
-  const categoryAnuncios = [
-    { nombre: 'Doctores' },
-    { nombre: 'Enfermeras' },
-    { nombre: 'Administrativo' },
-  ]
-  const categoryBlogs = [
     { nombre: 'Doctores' },
     { nombre: 'Enfermeras' },
     { nombre: 'Administrativo' },
@@ -214,6 +198,8 @@ let emptystaff = {
 };
 
 const [staffsCRUD, setstaffsCRUD] = useState(null);
+const [selectedEspecialidad, setSelectedEspecialidad] = useState(null);
+
 const [staffDialog, setstaffDialog] = useState(false);
 const [deletestaffDialog, setDeletestaffDialog] = useState(false);
 const [deletestaffsDialog, setDeletestaffsDialog] = useState(false);
@@ -231,6 +217,14 @@ useEffect(() => {
 const formatCurrency = (value) => {
   return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
+
+const especialidad = [
+  { name: 'Pediatra' },
+  { name: 'Psicologo' },
+  { name: 'Dentista' },
+  { name: '' },
+  { name: '' }
+];
 
 const openNew = () => {
   setstaff(emptystaff);
@@ -380,9 +374,6 @@ const imageBodyTemplate = (rowData) => {
 
 };
 
-const priceBodyTemplate = (rowData) => {
-  return formatCurrency(rowData.price);
-};
 
 const ratingBodyTemplate = (rowData) => {
   return <Rating value={rowData.rating} readOnly cancel={false} />;
@@ -446,10 +437,31 @@ const deletestaffsDialogFooter = (
   </React.Fragment>
 );
 
+  useEffect(() =>{
+    getModulos();
+  }, []);
+
+const getModulos = async() =>{
+
+  const request = await fetch(Global.url + 'modulo/traer/todos', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Autorization": localStorage.getItem("token")
+    }
+  });
+
+  const data = await request.json();
+  console.log(data);
+
+}
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
+
+        
         <Toolbar
           sx={{
             display: 'flex',
@@ -471,13 +483,15 @@ const deletestaffsDialogFooter = (
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" noWrap component="div">
 
-          </Typography>
-          <Typography variant="h5" noWrap component="div">
 
-          </Typography>
-
+          <CardMedia
+            component="img"
+            sx={{height: 80, width: 400 }}
+            image={cmaLogo}
+            alt="Paella dish"
+          />          
+         
           <Tooltip title="Opciones">
             <IconButton
               onClick={handleClick}
@@ -487,7 +501,7 @@ const deletestaffsDialogFooter = (
               aria-haspopup="true"
               aria-expanded={openMenu ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 50, height: 50 }} src={imageDr}></Avatar>
+              <Avatar sx={{ width: 80, height: 80 }} src={cmaUser}></Avatar>
             </IconButton>
           </Tooltip>
 
@@ -527,7 +541,7 @@ const deletestaffsDialogFooter = (
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             <MenuItem onClick={handleClose}>
-              <Avatar src={imageDr} /> Perfil
+              <Avatar src={cmaUser} /> Mi Perfil
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClose}>
@@ -549,26 +563,20 @@ const deletestaffsDialogFooter = (
 
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Typography
-            sx={{
-              textAlign: 'center'
-            }}
-          >
-            Centro Médico de las Américas
-          </Typography>
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <List>
-
-          <ListItem disablePadding sx={{ display: 'block' }}>
+          
+          <ListItem disablePadding sx={{ display: 'block', mt:2}}>
             <ListItemIcon
               onClick={handleDrawerOpen}
               sx={{
                 ml: open ? 1 : 1,
                 m: 1,
-                minHeight: 40,
+                minHeight: 50,
                 minWidth: 50,
                 justifyContent: open ? 'initial' : 'center',
                 
@@ -586,7 +594,6 @@ const deletestaffsDialogFooter = (
                 sx={{
                   display: open ? 1 : 'none',
                   width: 200,
-                  
                 }}
               >
                 <AccordionSummary
@@ -608,7 +615,8 @@ const deletestaffsDialogFooter = (
               </Accordion>
             </ListItemIcon>
           </ListItem>
-          <Divider />
+          
+          {/* <Divider />
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemIcon
               onClick={handleDrawerOpen}
@@ -679,7 +687,7 @@ const deletestaffsDialogFooter = (
           </ListItem>
           <Divider />
 
-          <Divider />
+
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               sx={{
@@ -714,7 +722,6 @@ const deletestaffsDialogFooter = (
                   </Typography>
                 </AccordionSummary>
               </Accordion>
-              {/* <ListItemText primary={modules.nombre} onClick={handleDrawerClose} sx={{ opacity: open ? 1 : 0 }} /> */}
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -753,7 +760,6 @@ const deletestaffsDialogFooter = (
                   </Typography>
                 </AccordionSummary>
               </Accordion>
-              {/* <ListItemText primary={modules.nombre} onClick={handleDrawerClose} sx={{ opacity: open ? 1 : 0 }} /> */}
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -793,10 +799,10 @@ const deletestaffsDialogFooter = (
                   </Typography>
                 </AccordionSummary>
               </Accordion>
-              {/* <ListItemText primary={modules.nombre} onClick={handleDrawerClose} sx={{ opacity: open ? 1 : 0 }} /> */}
             </ListItemButton>
           </ListItem>
-        </List>
+
+
         <Divider />
         <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemIcon
@@ -849,20 +855,32 @@ const deletestaffsDialogFooter = (
                 </AccordionDetails>
               </Accordion>
             </ListItemIcon>
-          </ListItem>
+          </ListItem> */}
+          
+        </List>
 
       </Drawer>
       
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
+      <ThemeProvider theme={theme}>
+
+      </ThemeProvider>
         {/* <DataTable value={Data} reorderableColumns reorderableRows onRowReorder={(e) => setstaffs(e.value)} tableStyle={{ minWidth: '50rem' }}>
           <Column rowReorder style={{ width: '3rem' }} />
             {dynamicColumns}
         </DataTable> */}
         {/* ---------------------------------------- */}
-        <Toast ref={toast} />
-            <div className="card">
+        <Box  
+          sx={{
+
+            display: {
+              laptop: 'none'
+            }
+          }}
+        >
+            <div className="card" >
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows  selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
@@ -870,33 +888,72 @@ const deletestaffsDialogFooter = (
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} staffs" globalFilter={globalFilter} header={header}>
                     <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
                     <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
                     <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column>
-                    <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
+                    
                     <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
+                    {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
-            </div>
+            </div>          
+        </Box>
+
+        <Box  
+          sx={{
+
+            display: {
+              laptop: 'none'
+            }
+          }}
+        >
+            <div className="card" >
+                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+
+                <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows  selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
+                        dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} del personal" globalFilter={globalFilter} header={header}>
+                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
+                    {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
+                    
+                    <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
+                    {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
+                    <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                </DataTable>
+            </div>          
+        </Box>        
+        <Toast ref={toast} />
+
 
             <Dialog visible={staffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="staff Details" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
                 {staff.image && <img src={`https://primefaces.org/cdn/primereact/images/staff/${staff.image}`} alt={staff.image} className="staff-image block m-auto pb-3" />}
                 <div className="field">
-                    <label htmlFor="name" className="font-bold">
+                    <label htmlFor="nombre" className="font-bold">
                         Nombre
                     </label>
-                    <InputText id="name" value={staff.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
-                    {submitted && !staff.name && <small className="p-error">Name is required.</small>}
+                    <InputText id="nombre" value={staff.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
+                    {submitted && !staff.name && <small className="p-error">Se requiere Nombre para continuar.</small>}
                 </div>
                 <div className="field">
-                    <label htmlFor="description" className="font-bold">
-                        Descripcion
+                    <label htmlFor="apellido" className="font-bold">
+                        Apellido
                     </label>
-                    <InputTextarea id="description" value={staff.description} onChange={(e) => onInputChange(e, 'descripion')} required rows={3} cols={20} />
+                    <InputText id="apellido" value={staff.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
+                    {submitted && !staff.name && <small className="p-error">Se requiere Apellido para continuar.</small>}
+                </div>
+                <div className="field">
+                    <label htmlFor="especialidad" className="font-bold">
+                        Especialidad
+                    </label>
+                    <Dropdown value={selectedEspecialidad} filter showClear onChange={(e) => setSelectedEspecialidad(e.value)} options={especialidad} optionLabel="name" placeholder="Seleccione Especialidad" style={{ borderRadius: 15 }} />
                 </div>
 
-                <div className="field">
+                {/* <div className="field">
                     <label className="mb-3 font-bold">Category</label>
                     <div className="formgrid grid">
                         <div className="field-radiobutton col-6">
@@ -916,7 +973,7 @@ const deletestaffsDialogFooter = (
                             <label htmlFor="category4">Fitness</label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="formgrid grid">
                     <div className="field col">
