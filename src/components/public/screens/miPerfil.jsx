@@ -200,9 +200,10 @@ export const MiPerfil = () => {
           >
             
               
-              <Grid item xs container direction='row' paddingY={2}>
-                      <Grid item paddingX={3}>
+              <Grid item xs container direction='row' paddingY={2} >
+                      <Grid item >
                         <Button
+                          
                           rounded
                           outlined
                           severity='info'
@@ -216,8 +217,9 @@ export const MiPerfil = () => {
 
                         </Button>                            
                       </Grid>
-                      <Grid item paddingX={3}>
+                      <Grid item >
                       <Button
+                        margin='auto'
                         outlined
                         rounded
                         severity='secondary'
@@ -255,13 +257,13 @@ export const MiPerfil = () => {
                 theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
             }}
           >
-            <Grid container >
+            
               <Grid item xs container direction='column' paddingY={2}>
                 <Grid item xs>
 
-                  <Box sx={{ flexGrow: 1 }}>
+                  
                     <Grid item xs container direction='row' paddingX={1}>
-                      <Box sx={{ flexGrow: 1 }}>
+                      
                         <Grid container spacing={2} padding={2}>
                           <Grid item >
                             <AccountBoxIcon sx={{ fontSize: 40 }} />
@@ -275,12 +277,12 @@ export const MiPerfil = () => {
                             </Typography>
                           </Grid>
                         </Grid>
-                      </Box>
+                      
                     </Grid>
-                  </Box>
-                  <Box sx={{ flexGrow: 1 }}>
+                  
+                  
                     <Grid item xs container direction='row' paddingX={1}>
-                      <Box sx={{ flexGrow: 1 }}>
+                     
                         <Grid container spacing={2} padding={2}>
                           <Grid item >
                             <ScheduleIcon sx={{ fontSize: 40 }} />
@@ -300,12 +302,12 @@ export const MiPerfil = () => {
                             </Typography>
                           </Grid>
                         </Grid>
-                      </Box>
+                      
                     </Grid>
-                  </Box>
+                  
                 </Grid>
               </Grid>
-            </Grid>
+            
           </Paper>
 
           {/* CEDULA */}
@@ -339,7 +341,7 @@ export const MiPerfil = () => {
                     severity='secondary'
 
                   >
-                    <ArrowDropDownIcon sx={{ fontSize: 80 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 60 }} />
                   </Button>
                 </Grid>
               </Box>

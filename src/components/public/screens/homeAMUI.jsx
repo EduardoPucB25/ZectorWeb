@@ -167,301 +167,305 @@ export default function HomeAdminMUI() {
 
   const [staffs, setstaffs] = useState([]);
   const columns = [
-      { field: 'code', header: 'Mover' },
-      { field: 'code', header: 'Code' },
-      { field: 'nombre', header: 'Nombre' },
-      { field: 'apellido', header: 'Apellido' },
-      { field: 'correo', header: 'Correo' },
-      { field: 'telefono', header: 'Telefono' },
-      { field: 'especialidad', header: 'Especialidad' }
+    { field: 'id', header: 'Id' },
+    { field: 'code', header: 'Code' },
+    { field: 'nombre', header: 'Nombre' },
+    { field: 'apellido', header: 'Apellido' },
+    { field: 'correo', header: 'Correo' },
+    { field: 'telefono', header: 'Telefono' },
+    { field: 'especialidad', header: 'Especialidad' }
 
   ];
 
 
   const dynamicColumns = columns.map((col, i) => {
-      return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
+    return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
   });
 
 
-// ------------------------------------
-// TABLE CRUD
-let emptystaff = {
-  id: null,
-  name: '',
-  image: null,
-  description: '',
-  category: null,
-  price: 0,
-  quantity: 0,
-  rating: 0,
-  inventoryStatus: 'INSTOCK'
-};
+  // ------------------------------------
+  // TABLE CRUD
+  let emptystaff = {
+    id: null,
+    name: '',
+    image: null,
+    description: '',
+    category: null,
 
-const [staffsCRUD, setstaffsCRUD] = useState(null);
-const [selectedEspecialidad, setSelectedEspecialidad] = useState(null);
 
-const [staffDialog, setstaffDialog] = useState(false);
-const [deletestaffDialog, setDeletestaffDialog] = useState(false);
-const [deletestaffsDialog, setDeletestaffsDialog] = useState(false);
-const [staff, setstaff] = useState(emptystaff);
-const [selectedstaffs, setSelectedstaffs] = useState(null);
-const [submitted, setSubmitted] = useState(false);
-const [globalFilter, setGlobalFilter] = useState(null);
-const toast = useRef(null);
-const dt = useRef(null);
+    inventoryStatus: 'INSTOCK'
+  };
 
-useEffect(() => {
-  StaffService.getStaff().then((data) => setstaffsCRUD(data));
-}, []);
+  const [staffsCRUD, setstaffsCRUD] = useState(null);
+  const [selectedEspecialidad, setSelectedEspecialidad] = useState(null);
 
-const formatCurrency = (value) => {
-  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-};
+  const [staffDialog, setstaffDialog] = useState(false);
+  const [deletestaffDialog, setDeletestaffDialog] = useState(false);
+  const [deletestaffsDialog, setDeletestaffsDialog] = useState(false);
+  const [staff, setstaff] = useState(emptystaff);
+  const [selectedstaffs, setSelectedstaffs] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [globalFilter, setGlobalFilter] = useState(null);
+  const toast = useRef(null);
+  const dt = useRef(null);
 
-const especialidad = [
-  { name: 'Pediatra' },
-  { name: 'Psicologo' },
-  { name: 'Dentista' },
-  { name: '' },
-  { name: '' }
-];
+  useEffect(() => {
+    StaffService.getStaff().then((data) => setstaffsCRUD(data));
+  }, []);
 
-const openNew = () => {
-  setstaff(emptystaff);
-  setSubmitted(false);
-  setstaffDialog(true);
-};
+  const formatCurrency = (value) => {
+    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  };
 
-const hideDialog = () => {
-  setSubmitted(false);
-  setstaffDialog(false);
-};
+  const especialidad = [
+    { name: 'Pediatra' },
+    { name: 'Psicologo' },
+    { name: 'Dentista' },
+    { name: '' },
+    { name: '' }
+  ];
 
-const hideDeletestaffDialog = () => {
-  setDeletestaffDialog(false);
-};
+  const openNew = () => {
+    setstaff(emptystaff);
+    setSubmitted(false);
+    setstaffDialog(true);
+  };
 
-const hideDeletestaffsDialog = () => {
-  setDeletestaffsDialog(false);
-};
+  const hideDialog = () => {
+    setSubmitted(false);
+    setstaffDialog(false);
+  };
 
-const savestaff = () => {
-  setSubmitted(true);
+  const hideDeletestaffDialog = () => {
+    setDeletestaffDialog(false);
+  };
 
-  if (staff.name.trim()) {
+  const hideDeletestaffsDialog = () => {
+    setDeletestaffsDialog(false);
+  };
+
+  const savestaff = () => {
+    setSubmitted(true);
+
+    if (staff.name.trim()) {
       let _staffs = [...staffs];
       let _staff = { ...staff };
 
       if (staff.id) {
-          const index = findIndexById(staff.id);
+        const index = findIndexById(staff.id);
 
-          _staffs[index] = _staff;
-          toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Updated', life: 3000 });
+        _staffs[index] = _staff;
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Updated', life: 3000 });
       } else {
-          _staff.id = createId();
-          _staff.image = 'staff-placeholder.svg';
-          _staffs.push(_staff);
-          toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Created', life: 3000 });
+        _staff.id = createId();
+        _staff.image = 'staff-placeholder.svg';
+        _staffs.push(_staff);
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Created', life: 3000 });
       }
 
       setstaffs(_staffs);
       setstaffDialog(false);
       setstaff(emptystaff);
-  }
-};
+    }
+  };
 
-const editstaff = (staff) => {
-  setstaff({ ...staff });
-  setstaffDialog(true);
-};
+  const editstaff = (staff) => {
+    setstaff({ ...staff });
+    setstaffDialog(true);
+  };
 
-const confirmDeletestaff = (staff) => {
-  setstaff(staff);
-  setDeletestaffDialog(true);
-};
+  const confirmDeletestaff = (staff) => {
+    setstaff(staff);
+    setDeletestaffDialog(true);
+  };
 
-const deletestaff = () => {
-  let _staffs = staffs.filter((val) => val.id !== staff.id);
+  const deletestaff = () => {
+    let _staffs = staffs.filter((val) => val.id !== staff.id);
 
-  setstaffs(_staffs);
-  setDeletestaffDialog(false);
-  setstaff(emptystaff);
-  toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Deleted', life: 3000 });
-};
+    setstaffs(_staffs);
+    setDeletestaffDialog(false);
+    setstaff(emptystaff);
+    toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Deleted', life: 3000 });
+  };
 
-const findIndexById = (id) => {
-  let index = -1;
+  const findIndexById = (id) => {
+    let index = -1;
 
-  for (let i = 0; i < staffs.length; i++) {
+    for (let i = 0; i < staffs.length; i++) {
       if (staffs[i].id === id) {
-          index = i;
-          break;
+        index = i;
+        break;
       }
-  }
+    }
 
-  return index;
-};
+    return index;
+  };
 
-const createId = () => {
-  let id = '';
-  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const createId = () => {
+    let id = '';
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+    }
 
-  return id;
-};
+    return id;
+  };
 
-const exportCSV = () => {
-  dt.current.exportCSV();
-};
+  const exportCSV = () => {
+    dt.current.exportCSV();
+  };
 
-const confirmDeleteSelected = () => {
-  setDeletestaffsDialog(true);
-};
+  const confirmDeleteSelected = () => {
+    setDeletestaffsDialog(true);
+  };
 
-const deleteSelectedstaffs = () => {
-  let _staffs = staffs.filter((val) => !selectedstaffs.includes(val));
+  const deleteSelectedstaffs = () => {
+    let _staffs = staffs.filter((val) => !selectedstaffs.includes(val));
 
-  setstaffs(_staffs);
-  setDeletestaffsDialog(false);
-  setSelectedstaffs(null);
-  toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staffs Deleted', life: 3000 });
-};
+    setstaffs(_staffs);
+    setDeletestaffsDialog(false);
+    setSelectedstaffs(null);
+    toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staffs Deleted', life: 3000 });
+  };
 
-const onCategoryChange = (e) => {
-  let _staff = { ...staff };
+  const onCategoryChange = (e) => {
+    let _staff = { ...staff };
 
-  _staff['category'] = e.value;
-  setstaff(_staff);
-};
+    _staff['category'] = e.value;
+    setstaff(_staff);
+  };
 
-const onInputChange = (e, name) => {
-  const val = (e.target && e.target.value) || '';
-  let _staff = { ...staff };
+  const onInputChange = (e, name) => {
+    const val = (e.target && e.target.value) || '';
+    let _staff = { ...staff };
 
-  _staff[`${name}`] = val;
+    _staff[`${name}`] = val;
 
-  setstaff(_staff);
-};
+    setstaff(_staff);
+  };
 
-const onInputNumberChange = (e, name) => {
-  const val = e.value || 0;
-  let _staff = { ...staff };
+  const onInputNumberChange = (e, name) => {
+    const val = e.value || 0;
+    let _staff = { ...staff };
 
-  _staff[`${name}`] = val;
+    _staff[`${name}`] = val;
 
-  setstaff(_staff);
-};
+    setstaff(_staff);
+  };
 
-const leftToolbarTemplate = () => {
-  return (
+  const leftToolbarTemplate = () => {
+    return (
       <div className="flex flex-wrap gap-2">
-          <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
-          <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedstaffs || !selectedstaffs.length} />
+        <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+        <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedstaffs || !selectedstaffs.length} />
       </div>
-  );
-};
+    );
+  };
 
-const rightToolbarTemplate = () => {
-  return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
-};
+  const rightToolbarTemplate = () => {
+    return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+  };
 
-const imageBodyTemplate = (rowData) => {
-  
-  return <img src={`${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
+  const imageBodyTemplate = (rowData) => {
 
-};
+    return <img src={`${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
+
+  };
 
 
-const ratingBodyTemplate = (rowData) => {
-  return <Rating value={rowData.rating} readOnly cancel={false} />;
-};
+  const ratingBodyTemplate = (rowData) => {
+    return <Rating value={rowData.rating} readOnly cancel={false} />;
+  };
 
-const statusBodyTemplate = (rowData) => {
-  return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData)}></Tag>;
-};
+  const statusBodyTemplate = (rowData) => {
+    return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData)}></Tag>;
+  };
 
-const actionBodyTemplate = (rowData) => {
-  return (
+  const actionBodyTemplate = (rowData) => {
+    return (
       <React.Fragment>
-          <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editstaff(rowData)} />
-          <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeletestaff(rowData)} />
+        <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editstaff(rowData)} />
+        <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeletestaff(rowData)} />
       </React.Fragment>
-  );
-};
+    );
+  };
 
-const getSeverity = (staff) => {
-  switch (staff.inventoryStatus) {
+  const getSeverity = (staff) => {
+    switch (staff.inventoryStatus) {
       case 'INSTOCK':
-          return 'success';
+        return 'success';
 
       case 'LOWSTOCK':
-          return 'warning';
+        return 'warning';
 
       case 'OUTOFSTOCK':
-          return 'danger';
+        return 'danger';
 
       default:
-          return null;
-  }
-};
+        return null;
+    }
+  };
 
-const header = (
-  <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
+  const header = (
+    <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
       <h4 className="m-0">Doctores</h4>
       <span className="p-input-icon-left">
-          <i className="pi pi-search" />
-          <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
+        <i className="pi pi-search" />
+        <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
       </span>
-      
-  </div>
-);
-const staffDialogFooter = (
-  <React.Fragment>
+
+    </div>
+  );
+  const staffDialogFooter = (
+    <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
       <Button label="Save" icon="pi pi-check" onClick={savestaff} />
-  </React.Fragment>
-);
-const deletestaffDialogFooter = (
-  <React.Fragment>
+    </React.Fragment>
+  );
+  const deletestaffDialogFooter = (
+    <React.Fragment>
       <Button label="No" icon="pi pi-times" outlined onClick={hideDeletestaffDialog} />
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deletestaff} />
-  </React.Fragment>
-);
-const deletestaffsDialogFooter = (
-  <React.Fragment>
+    </React.Fragment>
+  );
+  const deletestaffsDialogFooter = (
+    <React.Fragment>
       <Button label="No" icon="pi pi-times" outlined onClick={hideDeletestaffsDialog} />
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedstaffs} />
-  </React.Fragment>
-);
+    </React.Fragment>
+  );
 
-  useEffect(() =>{
+  useEffect(() => {
     getModulos();
   }, []);
 
-const getModulos = async() =>{
+  let ModulosData = {};
+  const getModulos = async () => {
 
-  const request = await fetch(Global.url + 'modulo/traer/todos', {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Autorization": localStorage.getItem("token")
-    }
-  });
+    const request = await fetch(Global.url + 'modulo/traer/todos', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Autorization": localStorage.getItem("token")
+      }
+    });
 
-  const data = await request.json();
-  console.log(data);
+    ModulosData = await request.json();
+    
+    console.log(ModulosData);    
+  }
 
-}
+
+
+
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
 
-        
+
         <Toolbar
           sx={{
             display: 'flex',
@@ -487,11 +491,11 @@ const getModulos = async() =>{
 
           <CardMedia
             component="img"
-            sx={{height: 80, width: 400 }}
+            sx={{ height: 80, width: 400 }}
             image={cmaLogo}
             alt="Paella dish"
-          />          
-         
+          />
+
           <Tooltip title="Opciones">
             <IconButton
               onClick={handleClick}
@@ -570,7 +574,7 @@ const getModulos = async() =>{
         </DrawerHeader>
         <List>
           
-          <ListItem disablePadding sx={{ display: 'block', mt:2}}>
+          <ListItem disablePadding sx={{ display: 'block', mt: 2 }}>
             <ListItemIcon
               onClick={handleDrawerOpen}
               sx={{
@@ -579,7 +583,7 @@ const getModulos = async() =>{
                 minHeight: 50,
                 minWidth: 50,
                 justifyContent: open ? 'initial' : 'center',
-                
+
               }}
             >
               <IconButton
@@ -612,11 +616,17 @@ const getModulos = async() =>{
                     </Typography>
                   </AccordionDetails>
                 ))}
+
+                <AccordionDetails>
+                  <Typography>
+                    Agregar
+                  </Typography>
+                </AccordionDetails>
               </Accordion>
             </ListItemIcon>
           </ListItem>
-          
-          {/* <Divider />
+
+          <Divider />
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemIcon
               onClick={handleDrawerOpen}
@@ -625,7 +635,7 @@ const getModulos = async() =>{
                 m: 1,
                 minHeight: 40,
                 minWidth: 50,
-                justifyContent: open ? 'initial' : 'center',   
+                justifyContent: open ? 'initial' : 'center',
               }}
             >
               <IconButton
@@ -651,35 +661,45 @@ const getModulos = async() =>{
                     Zonas
                   </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Camas hospital
-                  </Typography>
-                </AccordionDetails>
-                
+
+                <ListItemButton
+                  sx={{
+                    height: 50,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 1,
+                  }}
+                >
+                  <AccordionDetails>
+                    <Typography>
+                      Camas hospital
+                    </Typography>
+                  </AccordionDetails>                  
+                </ListItemButton>
+
+
                 <Accordion
                   sx={{
                     display: open ? 1 : 'none',
                     width: 200,
-                    
+
                   }}
                 >
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                          <Typography>
-                            Areas
-                          </Typography>
-                      </AccordionSummary>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>
+                      Areas
+                    </Typography>
+                  </AccordionSummary>
                   <AccordionDetails>
-                  <Typography>
+                    <Typography>
                       Camas hospital
                     </Typography>
-                  </AccordionDetails>                
-                </Accordion>                  
-                
+                  </AccordionDetails>
+                </Accordion>
+
 
 
               </Accordion>
@@ -803,8 +823,8 @@ const getModulos = async() =>{
           </ListItem>
 
 
-        <Divider />
-        <ListItem disablePadding sx={{ display: 'block' }}>
+          <Divider />
+          <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemIcon
               onClick={handleDrawerOpen}
               sx={{
@@ -812,7 +832,7 @@ const getModulos = async() =>{
                 m: 1,
                 minHeight: 40,
                 minWidth: 50,
-                justifyContent: open ? 'initial' : 'center',   
+                justifyContent: open ? 'initial' : 'center',
               }}
             >
               <IconButton
@@ -850,29 +870,29 @@ const getModulos = async() =>{
                 </AccordionDetails>
                 <AccordionDetails>
                   <Typography>
-                    
+
                   </Typography>
                 </AccordionDetails>
               </Accordion>
             </ListItemIcon>
-          </ListItem> */}
-          
+          </ListItem>
+
         </List>
 
       </Drawer>
-      
+
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <DrawerHeader />
-      <ThemeProvider theme={theme}>
+        <DrawerHeader />
+        <ThemeProvider theme={theme}>
 
-      </ThemeProvider>
+        </ThemeProvider>
         {/* <DataTable value={Data} reorderableColumns reorderableRows onRowReorder={(e) => setstaffs(e.value)} tableStyle={{ minWidth: '50rem' }}>
           <Column rowReorder style={{ width: '3rem' }} />
             {dynamicColumns}
         </DataTable> */}
         {/* ---------------------------------------- */}
-        <Box  
+        <Box
           sx={{
 
             display: {
@@ -880,80 +900,55 @@ const getModulos = async() =>{
             }
           }}
         >
-            <div className="card" >
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+          <div className="card" >
+            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
-                <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows  selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
-                        dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} staffs" globalFilter={globalFilter} header={header}>
-                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
-                    {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
-                    
-                    <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
-                    {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
-                    <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
-                </DataTable>
-            </div>          
+            <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
+              dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+              currentPageReportTemplate="Visualizando {first} de {last} de {totalRecords} staffs" globalFilter={globalFilter} header={header}>
+              <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+              <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
+              <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
+              <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
+              {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
+
+              <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
+              <Column field="telefono" header="Telefono" sortable style={{ minWidth: '8rem' }}></Column>
+
+              {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
+              <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+            </DataTable>
+          </div>
         </Box>
 
-        <Box  
-          sx={{
-
-            display: {
-              laptop: 'none'
-            }
-          }}
-        >
-            <div className="card" >
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-
-                <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows  selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
-                        dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} del personal" globalFilter={globalFilter} header={header}>
-                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
-                    {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
-                    
-                    <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
-                    {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
-                    <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
-                </DataTable>
-            </div>          
-        </Box>        
         <Toast ref={toast} />
 
 
-            <Dialog visible={staffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="staff Details" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
-                {staff.image && <img src={`https://primefaces.org/cdn/primereact/images/staff/${staff.image}`} alt={staff.image} className="staff-image block m-auto pb-3" />}
-                <div className="field">
-                    <label htmlFor="nombre" className="font-bold">
-                        Nombre
-                    </label>
-                    <InputText id="nombre" value={staff.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
-                    {submitted && !staff.name && <small className="p-error">Se requiere Nombre para continuar.</small>}
-                </div>
-                <div className="field">
-                    <label htmlFor="apellido" className="font-bold">
-                        Apellido
-                    </label>
-                    <InputText id="apellido" value={staff.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
-                    {submitted && !staff.name && <small className="p-error">Se requiere Apellido para continuar.</small>}
-                </div>
-                <div className="field">
-                    <label htmlFor="especialidad" className="font-bold">
-                        Especialidad
-                    </label>
-                    <Dropdown value={selectedEspecialidad} filter showClear onChange={(e) => setSelectedEspecialidad(e.value)} options={especialidad} optionLabel="name" placeholder="Seleccione Especialidad" style={{ borderRadius: 15 }} />
-                </div>
+        <Dialog visible={staffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="staff Details" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
+          {staff.image && <img src={`https://primefaces.org/cdn/primereact/images/staff/${staff.image}`} alt={staff.image} className="staff-image block m-auto pb-3" />}
+          <div className="field">
+            <label htmlFor="nombre" className="font-bold">
+              Nombre
+            </label>
+            <InputText id="nombre" value={staff.nombre} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
+            {submitted && !staff.nombre && <small className="p-error">Se requiere Nombre para continuar.</small>}
+          </div>
+          <div className="field">
+            <label htmlFor="apellido" className="font-bold">
+              Apellido
+            </label>
+            <InputText id="apellido" value={staff.apellido} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
+            {submitted && !staff.apellidos && <small className="p-error">Se requiere Apellido para continuar.</small>}
+          </div>
+          <div className="field">
+            <label htmlFor="especialidad" className="font-bold">
+              Especialidad
+            </label>
+            <Dropdown value={selectedEspecialidad} filter showClear onChange={(e) => setSelectedEspecialidad(e.value)} options={especialidad} optionLabel="name" placeholder="Seleccione Especialidad" style={{ borderRadius: 15 }} />
+          </div>
 
-                {/* <div className="field">
+          {/* <div className="field">
                     <label className="mb-3 font-bold">Category</label>
                     <div className="formgrid grid">
                         <div className="field-radiobutton col-6">
@@ -975,39 +970,39 @@ const getModulos = async() =>{
                     </div>
                 </div> */}
 
-                <div className="formgrid grid">
-                    <div className="field col">
-                        <label htmlFor="price" className="font-bold">
-                            Price
-                        </label>
-                        <InputNumber id="price" value={staff.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-                    </div>
-                    <div className="field col">
-                        <label htmlFor="quantity" className="font-bold">
-                            Quantity
-                        </label>
-                        <InputNumber id="quantity" value={staff.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
-                    </div>
-                </div>
-            </Dialog>
+          <div className="formgrid grid">
+            <div className="field col">
+              <label htmlFor="price" className="font-bold">
+                Price
+              </label>
+              <InputNumber id="price" value={staff.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+            </div>
+            <div className="field col">
+              <label htmlFor="quantity" className="font-bold">
+                Quantity
+              </label>
+              <InputNumber id="quantity" value={staff.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
+            </div>
+          </div>
+        </Dialog>
 
-            <Dialog visible={deletestaffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffDialogFooter} onHide={hideDeletestaffDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {staff && (
-                        <span>
-                            Estas seguro de eliminar <b>{staff.name}</b>?
-                        </span>
-                    )}
-                </div>
-            </Dialog>
+        <Dialog visible={deletestaffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffDialogFooter} onHide={hideDeletestaffDialog}>
+          <div className="confirmation-content">
+            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+            {staff && (
+              <span>
+                Estas seguro de eliminar <b>{staff.name}</b>?
+              </span>
+            )}
+          </div>
+        </Dialog>
 
-            <Dialog visible={deletestaffsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffsDialogFooter} onHide={hideDeletestaffsDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {staff && <span>Are you sure you want to delete the selected staffs?</span>}
-                </div>
-            </Dialog>
+        <Dialog visible={deletestaffsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffsDialogFooter} onHide={hideDeletestaffsDialog}>
+          <div className="confirmation-content">
+            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+            {staff && <span>Are you sure you want to delete the selected staffs?</span>}
+          </div>
+        </Dialog>
       </Box>
 
     </Box>

@@ -42,7 +42,7 @@ export default function HeaderLYR() {
                   <Grid item xs>
                      <NavLink to="/cma/login">
                         <Link
-                           to="login"
+                           
                            underline="none"
                            variant="solid"
                            color="neutral"
@@ -57,7 +57,7 @@ export default function HeaderLYR() {
 
                         <NavLink to="/cma/register">
                            <Link
-                              to="login"
+                              
                               underline="none"
                               variant="solid"
                               color="neutral"

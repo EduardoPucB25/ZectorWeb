@@ -10,7 +10,7 @@ export const PublicLayout = () => {
    return (
       <>
          {/* LAYOUT */}
-            <Header/>
+            
          {/* Contenido Principal */}
          <section className='contenido'>
             <Outlet />

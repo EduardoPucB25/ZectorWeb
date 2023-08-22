@@ -58,7 +58,6 @@ export default function Header() {
       <Responsive sx={{
         display: {
           tablet: "none"
-          
         }
       }}>
         <Box
@@ -76,23 +75,21 @@ export default function Header() {
           {/* Consumir directo el nobre del hospital */}
           {/* Icono de CMA */}
 
-          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2 }}>
-            Centro médico de las Américas
+          <Typography variant="h5" color='white' gutterBottom sx={{ marginTop: 2, ml: 2, margin: 'auto'}}>
+            Zector
           </Typography>
-
-
-          <Tooltip title="Opciones">
+          {/* <Tooltip title="Opciones">
             <IconButton
               onClick={handleClick}
               size="small"
-              sx={{ minWidth: 20 }}
+              sx={{ minWidth: 20, }}
               aria-controls={open ? 'account-menu' : undefined}
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 50, height: 50, marginRight: 0 }} src={imageDr}></Avatar>
+              <Avatar sx={{ width: 50, height: 50,  mr: 2}} src={imageDr}></Avatar>
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
         <Menu
           anchorEl={anchorEl}
@@ -171,11 +168,11 @@ export default function Header() {
           {/* Consumir directo el nobre del hospital */}
           {/* Icono de CMA */}
 
-          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2 }}>
-            Centro médico de las Américas
+          <Typography variant="h5" color='white' gutterBottom sx={{ marginTop: 2, ml: 4, margin: 'auto'}}>
+          Zector (Logo)
           </Typography>
 
-
+{/* 
           <Tooltip title="Opciones">
             <IconButton
               onClick={handleClick}
@@ -185,9 +182,9 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 50, height: 50, marginRight: 0 }} src={imageDr}></Avatar>
+              <Avatar sx={{ width: 50, height: 50, mr: 4}} src={imageDr}></Avatar>
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
         <Menu
           anchorEl={anchorEl}
@@ -266,12 +263,12 @@ export default function Header() {
           {/* Consumir directo el nobre del hospital */}
           {/* Icono de CMA */}
 
-          <Typography variant="h6" color='white' gutterBottom sx={{ marginTop: 2, ml: 4}}>
-            Centro médico de las Américas
+          <Typography variant="h5" color='white' gutterBottom sx={{ marginTop: 2, ml: 4, margin: 'auto'}}>
+            Zector (Logo)
           </Typography>
 
 
-          <Tooltip title="Opciones">
+          {/* <Tooltip title="Opciones">
             <IconButton
               onClick={handleClick}
               size="small"
@@ -282,7 +279,7 @@ export default function Header() {
             >
               <Avatar sx={{ width: 50, height: 50, mr: 4 }} src={imageDr}></Avatar>
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
         <Menu
           anchorEl={anchorEl}
