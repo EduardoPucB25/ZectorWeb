@@ -27,7 +27,7 @@ export default function HeaderLYR() {
    const [anchorEl, setAnchorEl] = React.useState(null);
    return (
       <React.Fragment>
-         <Grid container sx={{ display: 'flex', minHeight: 100, maxHeight: 100, width: '100%', backgroundColor: '#1f3c59', }}>
+         <Grid container sx={{ display: 'flex', height: (w * .15), width: w, backgroundColor: '#1f3c59', }}>
 
             <Grid item xs container direction="row" >
                <Grid item xs>
@@ -54,7 +54,6 @@ export default function HeaderLYR() {
                      </NavLink>
                   </Grid>
                   <Grid item xs>
-
                         <NavLink to="/cma/register">
                            <Link
                               
