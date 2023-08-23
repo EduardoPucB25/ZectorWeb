@@ -27,7 +27,7 @@ export default function HeaderLYR() {
    const [anchorEl, setAnchorEl] = React.useState(null);
    return (
       <React.Fragment>
-         <Grid container sx={{ display: 'flex', height: (w * .07), width: w, backgroundColor: '#1f3c59', }}>
+         <Grid container sx={{ display: 'flex', height: (w * .08), width: w, backgroundColor: '#1f3c59', }}>
 
             <Grid item xs container direction="row" >
                <Grid item xs>

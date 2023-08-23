@@ -71,22 +71,31 @@ export const Register = () => {
     });
 
     const data = await request.json();
-
-
-    // if (data.status == "success"){
-    //   setSaved("Guardado");
-    // }
-    // else{
-    //   setSaved("Error");
-    // }
+    console.log(data);
+    // if(data.status == 'success'){
+    //   showLogin(data.user);
+    // };
+    
+    // if(data.status == 'error'){
+    //   showError();
+    // };
   }
 
-  const show = () => {
-    toast.current.show({
-      severity: 'success', summary: 'Datos guardados',
-      detail: formik.values.nombres
-    });
-  };
+  // const showLogin = (user) => {
+  //   const usuario = user.nombre;
+
+  //   toast.current.show({
+  //     severity: 'success',
+  //     summary: 'Se ha registrado correctamente',
+  //     detail: `Bienvenido ${usuario}`
+  //   });
+  // };
+
+  // const showError = () => {
+  //   toast.current.show({
+  //     severity: 'error', summary: 'Error al registrarse'
+  //   });
+  // };
 
   const formik = useFormik({
 
@@ -113,7 +122,7 @@ export const Register = () => {
       return errors;
     },
     onSubmit: (data) => {
-      data && show(data);
+      
       saveUser(data);
       formik.resetForm();
     }
