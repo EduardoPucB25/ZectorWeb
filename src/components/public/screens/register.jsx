@@ -62,7 +62,7 @@ export const Register = () => {
 
     let newUser = form;
     console.log(newUser);
-    const request = await fetch(Global.url + "usuario/registrar", {
+    const request = await fetch(Global.url + "/usuario/registrar", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
@@ -609,6 +609,7 @@ export const Register = () => {
                   sx={{
                     display: {
                       laptop: 'none',
+
                     },
                     p: 5,
                     margin: 'auto',
