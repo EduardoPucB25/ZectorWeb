@@ -62,6 +62,7 @@ export const Register = () => {
 
     let newUser = form;
     console.log(newUser);
+
     const request = await fetch(Global.url + "/usuario/registrar", {
       method: "POST",
       body: JSON.stringify(newUser),
@@ -72,30 +73,30 @@ export const Register = () => {
 
     const data = await request.json();
     console.log(data);
-    // if(data.status == 'success'){
-    //   showLogin(data.user);
-    // };
+    if(data.status == 'success'){
+      showLogin(data.usuario);
+    };
     
-    // if(data.status == 'error'){
-    //   showError();
-    // };
+    if(data.status == 'error'){
+      showError();
+    };
   }
 
-  // const showLogin = (user) => {
-  //   const usuario = user.nombre;
+  const showLogin = (user) => {
+    const usuario = `${user.nombres} ${user.apellidos}`;
 
-  //   toast.current.show({
-  //     severity: 'success',
-  //     summary: 'Se ha registrado correctamente',
-  //     detail: `Bienvenido ${usuario}`
-  //   });
-  // };
+    toast.current.show({
+      severity: 'success',
+      summary: 'Se ha registrado correctamente',
+      detail: `Bienvenido ${usuario}`
+    });
+  };
 
-  // const showError = () => {
-  //   toast.current.show({
-  //     severity: 'error', summary: 'Error al registrarse'
-  //   });
-  // };
+  const showError = () => {
+    toast.current.show({
+      severity: 'error', summary: 'Error al registrarse'
+    });
+  };
 
   const formik = useFormik({
 

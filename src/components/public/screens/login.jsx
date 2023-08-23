@@ -53,7 +53,7 @@ export const Login = () => {
 
     let newUser = form;
     console.log(newUser);
-    const request = await fetch(Global.url + "usuario/login", {
+    const request = await fetch(Global.url + "/usuario/login", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
