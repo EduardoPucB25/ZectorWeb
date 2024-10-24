@@ -6,6 +6,7 @@ export default function App() {
     <div  className='layout'>
       {/* <Header/> */}
         <Routing/>
+        
       {/* <Routing/> */}
     </div>
   )

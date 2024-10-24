@@ -55,6 +55,7 @@ import ImgDr6 from '../../../assets/images/doctor6.jpg';
 import Usuario from '../../../assets/images/usuario.png';
 
 
+
 // ICONS
 
 function TablePersonal(props) {
@@ -573,7 +574,7 @@ function Row(props) {
               content: '""',
               display: 'block',
               position: 'absolute',
-              top: 95,
+              top: 70,
               right: -5,
               width: 20,
               height: 20,
@@ -599,13 +600,8 @@ function Row(props) {
           </ListItemIcon>
           Editar y Visualizar
         </MenuItem>
-        <Divider />
-        <MenuItem >
-          <ListItemIcon>
-            <DeleteIcon fontSize="small" />
-          </ListItemIcon>
-          Eliminar
-        </MenuItem>
+        
+
       </Menu>
 
 

@@ -20,7 +20,6 @@ import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
-
 import IconButton from '@mui/material/IconButton';
 
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -351,48 +350,9 @@ export const Register = () => {
                               >
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
                               </IconButton>
-
-
-                            {/* <Password type="password" id="inputPassword" inputStyle={{ borderRadius: 10, width: 350, padding: 5 }} name="password" onChange={changed} /> */}
-
                           </Grid>
                           {getFormErrorMessage('password')}
                         </Grid>
-
-
-                        {/* <Grid item xs>
-                          <Grid >
-                            <input type={passwordType} onChange={handlePasswordChange} value={passwordInput} name="password" class="form-control" placeholder="Password" />
-                            <i className="bi bi-eye-slash"></i> <i className="bi bi-eye"></i>
-                            <button className="btn btn-outline-primary" onClick={togglePassword}>
-                            { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
-                            </button>
-
-                            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
-                              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                              <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                  <InputAdornment position="end">
-                                    <IconButton
-                                      aria-label="toggle password visibility"
-                                      onClick={handleClickShowPassword}
-                                      onMouseDown={handleMouseDownPassword}
-                                      edge="end"
-                                    >
-                                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                  </InputAdornment>
-                                }
-                                label="Password"
-                              />
-                            </FormControl>
-
-                          </Grid>
-                        </Grid> */}
-
-
                         <Grid item xs md container direction='row' >
                           <Grid item >
 

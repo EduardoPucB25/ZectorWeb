@@ -64,7 +64,9 @@ export const Login = () => {
     const data = await request.json();
     console.log(data);
     if( data.status == 'success'){
-      showLogin(data.user);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.usuario));
+      showLogin(data.usuario);
     };
     
     if( data.status == 'error'){
@@ -72,13 +74,13 @@ export const Login = () => {
     };
   }
 
-  const showLogin = (user) => {
-    const usuario = user.nombre;
+  const showLogin = (usuario) => {
+    const user = usuario.nombre;
 
     toast.current.show({
       severity: 'success',
       summary: 'Ingresando',
-      detail: `Bienvenido ${usuario}`
+      detail: `Bienvenido ${user}`
     });
   };
   const showError = () => {
@@ -130,7 +132,7 @@ export const Login = () => {
           }}
         >
                   <Typography variant="h4" gutterBottom sx={{ minWidth: 200, textAlign: 'center' }}>
-                    Registro
+                    Ingresar
                   </Typography>
 
 

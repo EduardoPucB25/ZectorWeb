@@ -19,11 +19,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-
+import ListItemText from '@mui/material/ListItemText';
 
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
+import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 // import PersonAdd from '@mui/icons-material/PersonAdd';
@@ -42,6 +42,12 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import StreamIcon from '@mui/icons-material/Stream';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import ContentCut from '@mui/icons-material/ContentCut';
+import ContentCopy from '@mui/icons-material/ContentCopy';
+import ContentPaste from '@mui/icons-material/ContentPaste';
+import Cloud from '@mui/icons-material/Cloud';
 
 // TABLE CRUD COMPLETE
 import { Toast } from 'primereact/toast';
@@ -55,8 +61,9 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import { StaffService } from '../../../services/StaffService';
+// import { StaffService } from '../../../services/StaffService';
 import { Dropdown } from 'primereact/dropdown';
+import { Column } from 'primereact/column';
 
 import ImgDr1 from '../../../assets/images/doctor1.jpg';
 import ImgDr2 from '../../../assets/images/doctor2.jpg';
@@ -69,8 +76,16 @@ import cmaUser from '../../../assets/images/cmaUser.png';
 
 // PETICIONES API
 import { Global } from '../../../helpers/global'
+import useAuth from '../../../hooks/useAuth';
+import ItemCategoria from '../components/ItemCategoria';
+import ItemTables from '../components/ItemTables';
+import { PersonalService } from '../../../services/Personal.service';
+import ItemTableZonas from '../components/ItemTables';
+import TablePrueba from '../components/TablePrueba';
 
-const drawerWidth = 290;
+
+
+const drawerWidth = 320;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -88,7 +103,7 @@ const closedMixin = (theme) => ({
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(11)} + 1px)`,
   },
 });
 
@@ -136,6 +151,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
 export default function HomeAdminMUI() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -143,13 +159,12 @@ export default function HomeAdminMUI() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -157,61 +172,100 @@ export default function HomeAdminMUI() {
     setAnchorEl(null);
   };
 
+  const [dataPersonal, setDataPersonal] = useState(null);
+  const [modulos, setModulos] = useState([])
+ 
+  // TRAER TODOS LOS MODULOS
+  const getModulos = async () => {
+    const request = await fetch(Global.url + '/modulos/traer', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Autorization": localStorage.getItem("token")
+      }
+    });
+    const ModulosData = await request.json();
+    if (ModulosData.modulos && ModulosData.status == "success") {
+      setModulos(ModulosData.modulos);    
+    }
+  }
 
-  const categoryStaff = [
-    { nombre: 'Doctores' },
-    { nombre: 'Enfermeras' },
-    { nombre: 'Administrativo' },
-  ]
+  // Peticion API
+  // const getPersonal = async () => {
+  //   const request = await fetch(Global.url + '/personal/traer', {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Autorization": localStorage.getItem("token")
+  //     }
+  //   });
+  //   const PersonalData = await request.json();
+  //   // console.log(PersonalData);
+  //   if (PersonalData.personal && PersonalData.status == "success") {
+  //    setPersonal(PersonalData.personal);    
+  //   }
+  // }
+  // PersonalService.getPersonalMini().then((data)=>{
+  //   console.log(data);
+  // })
+
+  useEffect(() => {
+    getModulos();
+    // getPersonal();
+    PersonalService.ReqPersonal().then((data)=> setDataPersonal(data))    
+  }, []);
 
 
-  const [staffs, setstaffs] = useState([]);
-  const columns = [
-    { field: 'id', header: 'Id' },
-    { field: 'code', header: 'Code' },
-    { field: 'nombre', header: 'Nombre' },
-    { field: 'apellido', header: 'Apellido' },
-    { field: 'correo', header: 'Correo' },
-    { field: 'telefono', header: 'Telefono' },
-    { field: 'especialidad', header: 'Especialidad' }
+  // const columns = [
+  //   { field: 'id', header: 'Id' },
+  //   { field: 'code', header: 'Code' },
+  //   { field: 'nombres', header: 'Nombre' },
+  //   { field: 'apellidos', header: 'Apellido' },
+  //   { field: 'correo', header: 'Correo' },
+  //   { field: 'telefono', header: 'Telefono' },
+  //   { field: 'especialidad', header: 'Especialidad' }
 
-  ];
+  // ];
 
 
-  const dynamicColumns = columns.map((col, i) => {
-    return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
-  });
-
+  // const dynamicColumns = columns.map((col, i) => {
+  //   return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
+  // });
 
   // ------------------------------------
   // TABLE CRUD
-  let emptystaff = {
+  let emptyPersonal = {
     id: null,
-    name: '',
-    image: null,
-    description: '',
-    category: null,
+    nombres: '',
+    imagen: null,
+    apellidos: '',
+    especialidad: null,
+    role: ''
 
 
-    inventoryStatus: 'INSTOCK'
+    // inventoryStatus: 'INSTOCK'
   };
 
-  const [staffsCRUD, setstaffsCRUD] = useState(null);
+  
   const [selectedEspecialidad, setSelectedEspecialidad] = useState(null);
 
-  const [staffDialog, setstaffDialog] = useState(false);
-  const [deletestaffDialog, setDeletestaffDialog] = useState(false);
-  const [deletestaffsDialog, setDeletestaffsDialog] = useState(false);
-  const [staff, setstaff] = useState(emptystaff);
-  const [selectedstaffs, setSelectedstaffs] = useState(null);
+  const [personalDialog, setPersonalDialog] = useState(false);
+  const [deletePersonalDialog, setDeletePersonalDialog] = useState(false);
+  // const [deletestaffsDialog, setDeletestaffsDialog] = useState(false);
+  const [personal, setPersonal] = useState(emptyPersonal);
+  const [selectedPersonal, setSelectedPersonal] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
   const dt = useRef(null);
 
-  useEffect(() => {
-    StaffService.getStaff().then((data) => setstaffsCRUD(data));
-  }, []);
+
+
+  // useEffect(() => {
+  //   // StaffService.getStaff().then((data) => setstaffsCRUD(data));
+  //   setstaffsCRUD(personal);
+
+  // }, []);
 
   const formatCurrency = (value) => {
     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -221,78 +275,79 @@ export default function HomeAdminMUI() {
     { name: 'Pediatra' },
     { name: 'Psicologo' },
     { name: 'Dentista' },
-    { name: '' },
-    { name: '' }
+    { name: 'Enfermera' },
+    { name: 'Nutricion' }
   ];
 
   const openNew = () => {
-    setstaff(emptystaff);
+    setPersonal(emptyPersonal);
     setSubmitted(false);
-    setstaffDialog(true);
+    setPersonalDialog(true);
   };
 
   const hideDialog = () => {
     setSubmitted(false);
-    setstaffDialog(false);
+    setPersonalDialog(false);
   };
 
+  // Dialog Eliminar personal
   const hideDeletestaffDialog = () => {
-    setDeletestaffDialog(false);
+    setDeletePersonalDialog(false);
   };
 
   const hideDeletestaffsDialog = () => {
     setDeletestaffsDialog(false);
   };
 
-  const savestaff = () => {
+  const savePersonal = () => {
     setSubmitted(true);
 
-    if (staff.name.trim()) {
-      let _staffs = [...staffs];
-      let _staff = { ...staff };
+    if (personal.name.trim()) {
+      let _personals = [...personal];
+      let _personal = { ...personal };
 
-      if (staff.id) {
-        const index = findIndexById(staff.id);
+      if (personal.id) {
+        const index = findIndexById(personal.id);
 
-        _staffs[index] = _staff;
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Updated', life: 3000 });
+        _personals[index] = _personal;
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'personal Updated', life: 4000 });
       } else {
-        _staff.id = createId();
-        _staff.image = 'staff-placeholder.svg';
-        _staffs.push(_staff);
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Created', life: 3000 });
+        _personal.id = createId();
+        _personal.image = 'personal-placeholder.svg';
+        _personals.push(_personal);
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'personal Created', life: 4000 });
       }
 
-      setstaffs(_staffs);
-      setstaffDialog(false);
-      setstaff(emptystaff);
+      setstaffs(_personals);
+      setPersonalDialog(false);
+      setPersonal(emptystaff);
     }
   };
 
-  const editstaff = (staff) => {
-    setstaff({ ...staff });
-    setstaffDialog(true);
+  const editPersonal = (personal) => {
+    setPersonal({ ...personal });
+    setPersonalDialog(true);
   };
 
-  const confirmDeletestaff = (staff) => {
-    setstaff(staff);
-    setDeletestaffDialog(true);
+  const confirmDeletePersonal = (personal) => {
+    setPersonal(personal);
+    setDeletePersonalDialog(true);
   };
 
   const deletestaff = () => {
-    let _staffs = staffs.filter((val) => val.id !== staff.id);
+    let _personals = personal.filter((val) => val.id !== personal.id);
 
-    setstaffs(_staffs);
-    setDeletestaffDialog(false);
-    setstaff(emptystaff);
-    toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staff Deleted', life: 3000 });
+    setstaffs(_personals);
+    setDeletePersonalDialog(false);
+    setPersonal(emptystaff);
+    toast.current.show({ severity: 'success', summary: 'Personal Eliminado', detail: '', life: 4000 });
   };
 
   const findIndexById = (id) => {
     let index = -1;
 
-    for (let i = 0; i < staffs.length; i++) {
-      if (staffs[i].id === id) {
+    for (let i = 0; i < personal.length; i++) {
+      if (personal[i].id === id) {
         index = i;
         break;
       }
@@ -317,55 +372,68 @@ export default function HomeAdminMUI() {
   };
 
   const confirmDeleteSelected = () => {
-    setDeletestaffsDialog(true);
+    setDeletePersonalDialog(true);
   };
 
   const deleteSelectedstaffs = () => {
-    let _staffs = staffs.filter((val) => !selectedstaffs.includes(val));
+    let _personals = personal.filter((val) => !selectedPersonal.includes(val));
 
-    setstaffs(_staffs);
-    setDeletestaffsDialog(false);
-    setSelectedstaffs(null);
-    toast.current.show({ severity: 'success', summary: 'Successful', detail: 'staffs Deleted', life: 3000 });
+    setstaffs(_personals);
+    setSelectedPersonal(false);
+    setSelectedPersonal(null);
+    toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Personal Eliminado', life: 4000 });
   };
 
   const onCategoryChange = (e) => {
-    let _staff = { ...staff };
+    let _personal = { ...personal };
 
-    _staff['category'] = e.value;
-    setstaff(_staff);
+    _personal['category'] = e.value;
+    setPersonal(_personal);
   };
 
   const onInputChange = (e, name) => {
     const val = (e.target && e.target.value) || '';
-    let _staff = { ...staff };
+    let _personal = { ...personal };
 
-    _staff[`${name}`] = val;
+    _personal[`${name}`] = val;
 
-    setstaff(_staff);
+    setPersonal(_personal);
   };
 
   const onInputNumberChange = (e, name) => {
     const val = e.value || 0;
-    let _staff = { ...staff };
+    let _personal = { ...personal };
 
-    _staff[`${name}`] = val;
+    _personal[`${name}`] = val;
 
-    setstaff(_staff);
+    setPersonal(_personal);
   };
+
+  // const leftToolbarTemplate = () => {
+  //   return (
+  //     <div className="flex flex-wrap gap-2">
+  //       <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+  //       <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedstaffs || !selectedstaffs.length} />
+  //     </div>
+  //   );
+  // };
+
+  // const rightToolbarTemplate = () => {
+  //   return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+  // };
 
   const leftToolbarTemplate = () => {
     return (
-      <div className="flex flex-wrap gap-2">
-        <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
-        <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedstaffs || !selectedstaffs.length} />
-      </div>
+        <div className="flex flex-wrap gap-2">
+            <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+            <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedstaffs || !selectedstaffs.length} />
+        </div>
     );
-  };
+};
 
-  const rightToolbarTemplate = () => {
+const rightToolbarTemplate = () => {
     return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
-  };
+};
 
   const imageBodyTemplate = (rowData) => {
 
@@ -385,14 +453,14 @@ export default function HomeAdminMUI() {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editstaff(rowData)} />
-        <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeletestaff(rowData)} />
+        <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editPersonal(rowData)} />
+        <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeletePersonal(rowData)} />
       </React.Fragment>
     );
   };
 
-  const getSeverity = (staff) => {
-    switch (staff.inventoryStatus) {
+  const getSeverity = (personal) => {
+    switch (personal.inventoryStatus) {
       case 'INSTOCK':
         return 'success';
 
@@ -407,9 +475,9 @@ export default function HomeAdminMUI() {
     }
   };
 
-  const header = (
+  const header = (nameTable) => (
     <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
-      <h4 className="m-0">Doctores</h4>
+      <h4 className="m-0">{nameTable}</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
@@ -417,10 +485,12 @@ export default function HomeAdminMUI() {
 
     </div>
   );
+
+
   const staffDialogFooter = (
     <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-      <Button label="Save" icon="pi pi-check" onClick={savestaff} />
+      <Button label="Save" icon="pi pi-check" onClick={savePersonal} />
     </React.Fragment>
   );
   const deletestaffDialogFooter = (
@@ -436,35 +506,25 @@ export default function HomeAdminMUI() {
     </React.Fragment>
   );
 
-  useEffect(() => {
-    getModulos();
-  }, []);
-
-  let ModulosData = {};
-  const getModulos = async () => {
-
-    const request = await fetch(Global.url + 'modulo/traer/todos', {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Autorization": localStorage.getItem("token")
-      }
-    });
-
-    ModulosData = await request.json();
-    
-    console.log(ModulosData);    
-  }
 
 
-
-
+  // console.log(personal);
+  // AUTENTICACION DE USUARIO
+  const { auth } = useAuth();
+  const iconModulos = [
+    <GroupIcon />,
+    <ShareLocationIcon />,
+    <MailIcon />,
+    <AnnouncementIcon />,
+    <StreamIcon />,
+    <QuestionMarkIcon />,
+    <SettingsApplicationsIcon />
+  ];
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-
 
         <Toolbar
           sx={{
@@ -488,10 +548,9 @@ export default function HomeAdminMUI() {
             <MenuIcon />
           </IconButton>
 
-
           <CardMedia
             component="img"
-            sx={{ height: 80, width: 400 }}
+            sx={{ height: 100, width: 400 }}
             image={cmaLogo}
             alt="Paella dish"
           />
@@ -505,7 +564,7 @@ export default function HomeAdminMUI() {
               aria-haspopup="true"
               aria-expanded={openMenu ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 80, height: 80 }} src={cmaUser}></Avatar>
+              <Avatar sx={{ width: 60, height: 60 }} src={auth.image}></Avatar>
             </IconButton>
           </Tooltip>
 
@@ -545,7 +604,7 @@ export default function HomeAdminMUI() {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             <MenuItem onClick={handleClose}>
-              <Avatar src={cmaUser} /> Mi Perfil
+              <Avatar src={auth.image} /> {auth.nombres}
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClose}>
@@ -572,265 +631,89 @@ export default function HomeAdminMUI() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
-        <List>
+        <List
+          sx={{
+            mt: 4
+          }}
+        >
+          {/* {modulos?.map((mod) =>(<ItemModulo key={mod.id} categorias={mod.categorias}/> ))} */}
           
-          <ListItem disablePadding sx={{ display: 'block', mt: 2 }}>
-            <ListItemIcon
-              onClick={handleDrawerOpen}
-              sx={{
-                ml: open ? 1 : 1,
-                m: 1,
-                minHeight: 50,
-                minWidth: 50,
-                justifyContent: open ? 'initial' : 'center',
+          {
+            modulos?.map((modulo, index) => (
 
-              }}
-            >
-              <IconButton
-                sx={{
-                  justifyContent: open ? 'initial' : 'center',
-                  px: open ? 1.5 : 1
-                }}
-              >
-                <GroupIcon />
-              </IconButton>
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none',
-                  width: 200,
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    Staff
-                  </Typography>
-                </AccordionSummary>
-                {categoryStaff.map((staff) => (
-                  <AccordionDetails key={staff.nombre}>
-                    <Typography>
-                      {staff.nombre}
-                    </Typography>
-                  </AccordionDetails>
-                ))}
-
-                <AccordionDetails>
-                  <Typography>
-                    Agregar
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </ListItemIcon>
-          </ListItem>
-
-          <Divider />
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemIcon
-              onClick={handleDrawerOpen}
-              sx={{
-                ml: open ? 1 : 1,
-                m: 1,
-                minHeight: 40,
-                minWidth: 50,
-                justifyContent: open ? 'initial' : 'center',
-              }}
-            >
-              <IconButton
-                sx={{
-                  justifyContent: open ? 'initial' : 'center',
-                  px: open ? 1.5 : 1
-                }}
-              >
-                <ShareLocationIcon />
-              </IconButton>
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none',
-                  width: 200,
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    Zonas
-                  </Typography>
-                </AccordionSummary>
-
-                <ListItemButton
+              <ListItem disablePadding sx={{ display: 'block', }} key={modulo._id}>
+                <ListItemIcon
+                  onClick={handleDrawerOpen}
                   sx={{
-                    height: 50,
+                    m: open ? 2 : .5,
+                    minHeight: 50,
+                    minWidth: 50,
                     justifyContent: open ? 'initial' : 'center',
-                    px: 1,
                   }}
                 >
-                  <AccordionDetails>
-                    <Typography>
-                      Camas hospital
-                    </Typography>
-                  </AccordionDetails>                  
-                </ListItemButton>
-
-
-                <Accordion
-                  sx={{
-                    display: open ? 1 : 'none',
-                    width: 200,
-
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
+                  <IconButton
+                    sx={{
+                      justifyContent: open ? 'initial' : 'center',
+                      px: open ? 1.5 : 2,
+                      marginLeft: open ? 0 : 2,
+                      height: 50,
+                    }}
                   >
-                    <Typography>
-                      Areas
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Camas hospital
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                    {iconModulos[index]}
+                  </IconButton>
+                  <Accordion
+                    sx={{
+                      display: open ? 1 : 'none',
+                      width: 230,
 
+                    }}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography>
+                        {modulo.nombre}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails
+                      sx={{
+                        m: 0
+                      }}
+                    >
+                    <ItemCategoria key={modulo.id} categorias={modulo.categorias} />
+                      <Divider />
 
-
-              </Accordion>
-            </ListItemIcon>
-          </ListItem>
-          <Divider />
-
-
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 50,
-                justifyContent: open ? 'initial' : 'center',
-                px: 3,
-              }}
-            >
-              <ListItemIcon
-                onClick={handleDrawerOpen}
-                sx={{
-
-                  minWidth: 0,
-                  mr: open ? 1 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <MailIcon />
-              </ListItemIcon>
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none'
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
+                      <MenuItem>
+                        <ListItemIcon>
+                          <Cloud fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText>Agregar {modulo.nombre}</ListItemText>
+                      </MenuItem>
+                    </AccordionDetails>
+                  </Accordion>
+                </ListItemIcon>
+                <Typography
+                  sx={{
+                    display: open ? 'none' : 'block',
+                  }}
+                  variant='body2'
+                  textAlign='center'
                 >
-                  <Typography>
-                    Buzón
-                  </Typography>
-                </AccordionSummary>
-              </Accordion>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
+                  {modulo.nombre}
+                </Typography>
+                <Divider />
+              </ListItem>
+            )
+            )}
 
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 50,
-                justifyContent: open ? 'initial' : 'center',
-                px: 3,
-              }}
-            >
-              <ListItemIcon
-                onClick={handleDrawerOpen}
-                sx={{
-
-                  minWidth: 0,
-                  mr: open ? 1 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <AnnouncementIcon />
-              </ListItemIcon>
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none'
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    Anuncios
-                  </Typography>
-                </AccordionSummary>
-              </Accordion>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 50,
-                justifyContent: open ? 'initial' : 'center',
-                px: 3,
-              }}
-            >
-              <ListItemIcon
-                onClick={handleDrawerOpen}
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 1 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-
-                <StreamIcon />
-              </ListItemIcon>
-
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none'
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    Blogs
-                  </Typography>
-                </AccordionSummary>
-              </Accordion>
-            </ListItemButton>
-          </ListItem>
-
-
-          <Divider />
-          <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItem disablePadding sx={{ display: 'block', mt: 0, }} >
             <ListItemIcon
               onClick={handleDrawerOpen}
               sx={{
-                ml: open ? 1 : 1,
-                m: 1,
-                minHeight: 40,
+                m: open ? 2 : .5,
+                minHeight: 50,
                 minWidth: 50,
                 justifyContent: open ? 'initial' : 'center',
               }}
@@ -838,108 +721,181 @@ export default function HomeAdminMUI() {
               <IconButton
                 sx={{
                   justifyContent: open ? 'initial' : 'center',
-                  px: open ? 1.5 : 1
+                  px: open ? 1.5 : 2,
+                  marginLeft: open ? 0 : 2,
+                  height: 50,
                 }}
               >
-                <ShareLocationIcon />
+                < SettingsApplicationsIcon />
               </IconButton>
-              <Accordion
-                sx={{
-                  display: open ? 1 : 'none',
-                  width: 200,
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    Encuestas
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Atencion al cliente
-                  </Typography>
-                </AccordionDetails>
-                <AccordionDetails>
-                  <Typography>
-                    Calidad
-                  </Typography>
-                </AccordionDetails>
-                <AccordionDetails>
-                  <Typography>
-
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
             </ListItemIcon>
+
+            <Typography
+              sx={{
+                display: open ? 'none' : 'block',
+              }}
+              variant='body2'
+              textAlign='center'
+            >
+              Agregar
+            </Typography>
           </ListItem>
-
         </List>
-
       </Drawer>
-
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <ThemeProvider theme={theme}>
-
+            
+          <TablePrueba />
         </ThemeProvider>
         {/* <DataTable value={Data} reorderableColumns reorderableRows onRowReorder={(e) => setstaffs(e.value)} tableStyle={{ minWidth: '50rem' }}>
           <Column rowReorder style={{ width: '3rem' }} />
             {dynamicColumns}
         </DataTable> */}
-        {/* ---------------------------------------- */}
-        <Box
-          sx={{
+        
+        {/* -----------TABLA PERSONAL-----------*/}
+        
+          
+        
+                  <Box
+                  sx={{
+                    display: {
+                      laptop: 'none'
+                    }
+                  }}
+                  
+                >
+                  
+                  <Toast ref={toast} />
+                  <div className="card" >                    
+                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                    <DataTable
+                      
+                      ref={dt}
+                      value={dataPersonal}
+                      // reorderableColumns reorderableRows
+                      // onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
+                      // selection={selectedstaffs} onSelectionChange={(e) => setSelectedstaffs(e.value)} selectionMode="single"
+                      dataKey="id"
+                      paginator rows={10}
+                      rowsPerPageOptions={[5, 10, 25]}
+                      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                      currentPageReportTemplate={`Visualizando {first} de {last} de {totalRecords} ${modulos.nombre}`}
+                      globalFilter={globalFilter}
+                      header={header('Personal')}>
+                      <Column field="image" header="Imagen" body={imageBodyTemplate}></Column>
+                      {/* <Column field="_id" header="Id" sortable style={{ minWidth: '12rem' }}></Column> */}
+                      <Column field="nombres" header="Nombre" sortable style={{ minWidth: '8rem' }}></Column>
+                      <Column field="apellidos" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
+                      <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
+                      <Column field="role" header="Rol" sortable style={{ minWidth: '8rem' }}></Column>
 
+                      <Column field="telefono" header="Telefono" sortable style={{ minWidth: '8rem' }}></Column>
+                      <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                    </DataTable>
+                    
+                  </div>
+                
+                <Dialog visible={personalDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Personal" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
+                  {personal.imagen && <img src={`https://primefaces.org/cdn/primereact/images/personal/${personal.imagen}`} alt={personal.imagen} className="personal-image block m-auto pb-3" />}
+                  <div className="field">
+                    <label htmlFor="nombres" className="font-bold">
+                      Nombre
+                    </label>
+                    <InputText id="nombres" value={personal.nombres} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !personal.name })} style={{ borderRadius: 15 }} />
+                    {submitted && !personal.nombres && <small className="p-error">Se requiere Nombre para continuar.</small>}
+                  </div>
+                  <div className="field">
+                    <label htmlFor="apellidos" className="font-bold">
+                      Apellido
+                    </label>
+                    <InputText id="apellidos" value={personal.apellidos} onChange={(e) => onInputChange(e, 'name')} required className={classNames({ 'p-invalid': submitted && !personal.name })} style={{ borderRadius: 15 }} />
+                    {submitted && !personal.apellidos && <small className="p-error">Se requiere Apellido para continuar.</small>}
+                  </div>
+                  <div className="field">
+                    <label htmlFor="especialidad" className="font-bold">
+                      Especialidad
+                    </label>
+
+                    <Dropdown id='especialidad' value={personal.especialidad} filter showClear onChange={(e) => setSelectedEspecialidad(e.value)} required  options={especialidad} optionLabel="name" placeholder="Seleccione Especialidad" style={{ borderRadius: 15 }} />
+                    {submitted && !personal.especialidad && <small className="p-error">Se requiere Especialidad para continuar.</small>}
+                  </div>
+
+                  
+                </Dialog>
+        
+                <Dialog visible={deletePersonalDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffDialogFooter} onHide={hideDeletestaffDialog}>
+                  <div className="confirmation-content">
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                    {personal && (
+                      <span>
+                        Estas seguro de eliminar <b> {personal.nombres}</b> de la tabla Personal?
+                      </span>
+                    )}
+                  </div>
+                </Dialog>
+        
+                {/* <Dialog visible={deletestaffsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffsDialogFooter} onHide={hideDeletestaffsDialog}>
+                  <div className="confirmation-content">
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                    {personal && <span>Estas seguro de eliminar el siguiente personal?</span>}
+                  </div>
+                </Dialog> */}
+
+                </Box>
+          {/* -----------TABLA ZONAS----------- */}
+
+          <ItemTableZonas />
+        
+        {/* <Box
+          sx={{
             display: {
               laptop: 'none'
             }
           }}
         >
+          <Toast ref={toast} />
           <div className="card" >
-            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-
-            <DataTable ref={dt} value={staffsCRUD} reorderableColumns reorderableRows selection={selectedstaffs} onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
-              dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+            <DataTable
+              ref={dt}
+              value={staffsCRUD}
+              reorderableColumns reorderableRows
+              selection={selectedstaffs}
+              onRowReorder={(e) => setstaffs(e.value)} onSelectionChange={(e) => setSelectedstaffs(e.value)}
+              dataKey="id"
+              paginator rows={10}
+              rowsPerPageOptions={[5, 10, 25]}
               paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-              currentPageReportTemplate="Visualizando {first} de {last} de {totalRecords} staffs" globalFilter={globalFilter} header={header}>
+              currentPageReportTemplate="Visualizando {first} de {last} de {totalRecords} staffs"
+              globalFilter={globalFilter}
+              header={header("Nombre de la tabla")}>
               <Column field="image" header="Image" body={imageBodyTemplate}></Column>
               <Column field="code" header="Id" sortable style={{ minWidth: '12rem' }}></Column>
               <Column field="nombre" header="Name" sortable style={{ minWidth: '8rem' }}></Column>
               <Column field="apellido" header="Apellido" sortable style={{ minWidth: '8rem' }}></Column>
-              {/* <Column field="description" header="Descripcion" sortable style={{ minWidth: '10rem' }}></Column> */}
-
               <Column field="especialidad" header="Especialidad" sortable style={{ minWidth: '8rem' }}></Column>
               <Column field="telefono" header="Telefono" sortable style={{ minWidth: '8rem' }}></Column>
-
-              {/* <Column field="valoracion" header="Valoracion" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
               <Column header='Opciones' body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
             </DataTable>
+            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
           </div>
-        </Box>
-
-        <Toast ref={toast} />
-
-
-        <Dialog visible={staffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="staff Details" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
-          {staff.image && <img src={`https://primefaces.org/cdn/primereact/images/staff/${staff.image}`} alt={staff.image} className="staff-image block m-auto pb-3" />}
+        
+        <Dialog visible={personalDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Personal" modal className="p-fluid" footer={staffDialogFooter} onHide={hideDialog}>
+          {personal.image && <img src={`https://primefaces.org/cdn/primereact/images/personal/${personal.image}`} alt={personal.image} className="personal-image block m-auto pb-3" />}
           <div className="field">
             <label htmlFor="nombre" className="font-bold">
               Nombre
             </label>
-            <InputText id="nombre" value={staff.nombre} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
-            {submitted && !staff.nombre && <small className="p-error">Se requiere Nombre para continuar.</small>}
+            <InputText id="nombre" value={personal.nombre} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !personal.name })} style={{ borderRadius: 15 }} />
+            {submitted && !personal.nombre && <small className="p-error">Se requiere Nombre para continuar.</small>}
           </div>
           <div className="field">
             <label htmlFor="apellido" className="font-bold">
               Apellido
             </label>
-            <InputText id="apellido" value={staff.apellido} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !staff.name })} />
-            {submitted && !staff.apellidos && <small className="p-error">Se requiere Apellido para continuar.</small>}
+            <InputText id="apellido" value={personal.apellido} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !personal.name })} style={{ borderRadius: 15 }} />
+            {submitted && !personal.apellidos && <small className="p-error">Se requiere Apellido para continuar.</small>}
           </div>
           <div className="field">
             <label htmlFor="especialidad" className="font-bold">
@@ -947,51 +903,14 @@ export default function HomeAdminMUI() {
             </label>
             <Dropdown value={selectedEspecialidad} filter showClear onChange={(e) => setSelectedEspecialidad(e.value)} options={especialidad} optionLabel="name" placeholder="Seleccione Especialidad" style={{ borderRadius: 15 }} />
           </div>
-
-          {/* <div className="field">
-                    <label className="mb-3 font-bold">Category</label>
-                    <div className="formgrid grid">
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={staff.category === 'Accessories'} />
-                            <label htmlFor="category1">Accessories</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={staff.category === 'Clothing'} />
-                            <label htmlFor="category2">Clothing</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={staff.category === 'Electronics'} />
-                            <label htmlFor="category3">Electronics</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={staff.category === 'Fitness'} />
-                            <label htmlFor="category4">Fitness</label>
-                        </div>
-                    </div>
-                </div> */}
-
-          <div className="formgrid grid">
-            <div className="field col">
-              <label htmlFor="price" className="font-bold">
-                Price
-              </label>
-              <InputNumber id="price" value={staff.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-            </div>
-            <div className="field col">
-              <label htmlFor="quantity" className="font-bold">
-                Quantity
-              </label>
-              <InputNumber id="quantity" value={staff.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
-            </div>
-          </div>
         </Dialog>
 
-        <Dialog visible={deletestaffDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffDialogFooter} onHide={hideDeletestaffDialog}>
+        <Dialog visible={deletePersonalDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffDialogFooter} onHide={hideDeletestaffDialog}>
           <div className="confirmation-content">
             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-            {staff && (
+            {personal && (
               <span>
-                Estas seguro de eliminar <b>{staff.name}</b>?
+                Estas seguro de eliminar <b> {personal.name}</b>?
               </span>
             )}
           </div>
@@ -1000,11 +919,12 @@ export default function HomeAdminMUI() {
         <Dialog visible={deletestaffsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deletestaffsDialogFooter} onHide={hideDeletestaffsDialog}>
           <div className="confirmation-content">
             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-            {staff && <span>Are you sure you want to delete the selected staffs?</span>}
+            {personal && <span>Are you sure you want to delete the selected staffs?</span>}
           </div>
         </Dialog>
-      </Box>
+        </Box> */}
 
+      </Box>
     </Box>
   );
 }
